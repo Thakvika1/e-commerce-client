@@ -1,9 +1,16 @@
 import React from 'react'
+import Navbar from './components/layout/Navbar'
+import Footer from './components/layout/Footer'
+import { data } from './data/navbarData'
+import Button from './components/common/Button'
 
 const App = () => {
+
   return (
     <div>
-      <h1 class="text-3xl font-bold underline">Hello world!</h1>
+      {/* <Navbar items={data} />
+      <Footer /> */}
+      <Button />
     </div>
   )
 }

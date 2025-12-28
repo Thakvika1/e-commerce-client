@@ -1,29 +1,45 @@
 /* src/index.css */
 @import "tailwindcss";
 
+
+/* Enabling the "class" strategy for dark mode */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Tailwind v4 theme tokens */
 @theme {
+  /* 🎨 Colors */
   --color-primary: #2b8cee;
   --color-background-light: #f6f7f8;
   --color-background-dark: #101922;
-  --color-tiki: #000
-  
+
+  /* 🔤 Fonts */
   --font-display: "Inter", sans-serif;
-  
+
+  /* 📐 Radius */
   --radius-default: 0.25rem;
   --radius-lg: 0.5rem;
   --radius-xl: 0.75rem;
+  --radius-full: 9999px;
+}
+@layer base {
+  body {
+    @apply font-display antialiased;
+  }
 }
 
+
+
+/* Scrollbar */
 ::-webkit-scrollbar {
-width: 8px;
+  width: 8px;
 }
 ::-webkit-scrollbar-track {
-background: transparent;
+  background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-background-color: #cbd5e1;
-border-radius: 4px;
+  background-color: #cbd5e1;
+  border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-background-color: #94a3b8;
+  background-color: #94a3b8;
 }

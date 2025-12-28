@@ -6,15 +6,19 @@ import Button from './components/common/Button'
 import ProductCard from './components/cards/ProductCard'
 import starbuck from './assets/images/starbuck.avif'
 import starbuck2 from './assets/images/starbuck2.jpg'
+import Register from './pages/authentication/Register'
+import Login from './pages/authentication/Login'
 
 const App = () => {
-
   return (
     <>
-      {/* <Navbar items={data} /> */}
-      {/* <Footer /> */}
+      <Navbar items={data} />
       {/* <Button /> */}
-      <ProductCard image={starbuck2} />
+      {/* <ProductCard image={starbuck2} /> */}
+
+      <Login />
+      {/* <Register /> */}
+      <Footer />
     </>
   )
 }

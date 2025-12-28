@@ -8,6 +8,8 @@ import starbuck from './assets/images/starbuck.avif'
 import starbuck2 from './assets/images/starbuck2.jpg'
 import Register from './pages/authentication/Register'
 import Login from './pages/authentication/Login'
+import Cart from './pages/user/cart'
+
 
 const App = () => {
   return (
@@ -15,8 +17,9 @@ const App = () => {
       <Navbar items={data} />
       {/* <Button /> */}
       {/* <ProductCard image={starbuck2} /> */}
+      <Cart />
 
-      <Login />
+      {/* <Login /> */}
       {/* <Register /> */}
       <Footer />
     </>

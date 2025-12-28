@@ -9,8 +9,13 @@
 @theme {
   /* 🎨 Colors */
   --color-primary: #2b8cee;
+  --color-primary-dark: #1a6bbd;
   --color-background-light: #f6f7f8;
   --color-background-dark: #101922;
+
+  /* 🧊 Surface Colors (Cards/Modals) */
+  --color-surface-light: #ffffff;
+  --color-surface-dark: #1e293b;
 
   /* 🔤 Fonts */
   --font-display: "Inter", sans-serif;
@@ -24,6 +29,7 @@
 @layer base {
   body {
     @apply font-display antialiased;
+    /* @apply bg-background-light text-slate-900 dark:bg-background-dark dark:text-white transition-colors duration-200; */
   }
 }
 

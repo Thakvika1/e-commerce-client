@@ -1,12 +1,97 @@
 import React, { useState } from 'react'
+import { useRegisterUserMutation } from '../../services/authApi'
+import Input from '../../components/common/Input'
 
 const Register = () => {
+  const [registerUser, { isLoading, error }] = useRegisterUserMutation()
+
+  const [errors, setErrors] = useState(null)
+
+  const [checkPassword, setCheckPassword] = useState('')
+
+  const [form, setForm] = useState({
+    name: '',
+    email: '',
+    password: '',
+    confirm_password: '',
+  })
+
+  // validate data
+  const validateForm = () => {
+    const newErrors = {}
+
+    if (!form.name.trim()) newErrors.name = 'Name is required'
+    if (!form.email.trim()) newErrors.email = 'Email is required'
+    if (!form.password) newErrors.password = 'Password is required'
+    if (form.password.length < 8)
+      newErrors.password = 'Password must be at least 8 characters'
+    if (form.password !== form.confirm_password)
+      newErrors.confirm_password = 'Passwords do not match'
+
+    setErrors({ errors: newErrors })
+    return Object.keys(newErrors).length === 0
+  }
+
+  const handleChange = (e) => {
+    setForm({
+      ...form,
+      [e.target.name]: e.target.value,
+    })
+
+    setErrors((prev) => ({
+      ...prev,
+      errors: {
+        ...prev?.errors,
+        [e.target.name]: null,
+      },
+    }))
+
+    // clear password mismatch when typing
+    if (e.target.name === 'password' || e.target.name === 'confirm_password') {
+      setCheckPassword('')
+    }
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+
+    if (!validateForm()) return
+
+    // password mismatch check
+    if (form.password !== form.confirm_password) {
+      setCheckPassword('Password does not match')
+      return
+    }
+
+    // clear error if matched
+    setCheckPassword('')
+
+    try {
+      const res = await registerUser(form).unwrap()
+      setErrors(null)
+      setForm({
+        name: '',
+        email: '',
+        password: '',
+        confirm_password: '',
+      })
+      alert('Registered successfully!')
+      // console.log(res)
+    } catch (err) {
+      console.log(err)
+
+      if (err?.data) {
+        setErrors(err.data)
+      }
+    }
+  }
+
   const [showPassword, setShowPassword] = useState(false)
   const [showConfirmPassword, setShowConfirmPassword] = useState(false)
 
   return (
     <main className="flex-grow flex items-center justify-center p-4 sm:p-8 bg-background-light dark:bg-background-dark min-h-screen font-display">
-      <div className="w-full max-w-[520px] bg-white dark:bg-[#15202b] rounded-xl shadow-xl border border-slate-100 dark:border-slate-800 overflow-hidden transition-all">
+      <div className="w-full max-w-[520px] rounded-xl shadow-xl border border-slate-100 dark:border-slate-800 overflow-hidden transition-all">
         {/* Card Header */}
         <div className="px-8 pt-10 pb-2">
           <div className="flex flex-col gap-2">
@@ -21,20 +106,18 @@ const Register = () => {
 
         {/* Form */}
         <div className="px-8 pb-10 pt-4">
-          <form
-            className="flex flex-col gap-5"
-            onSubmit={(e) => e.preventDefault()}
-          >
+          <form className="flex flex-col gap-5" onSubmit={handleSubmit}>
             {/* Full Name */}
             <label className="flex flex-col gap-2">
               <span className="text-slate-900 dark:text-slate-200 text-sm font-semibold">
                 Full Name
               </span>
-              <input
-                type="text"
-                placeholder="John Doe"
-                required
-                className="w-full h-12 px-4 rounded-default border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900/50 text-slate-900 dark:text-white placeholder:text-slate-400 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all"
+              <Input
+                name={'name'}
+                handleChange={handleChange}
+                placeholder={'John Doe'}
+                autoComplete={'username'}
+                type={'text'}
               />
             </label>
 
@@ -43,12 +126,19 @@ const Register = () => {
               <span className="text-slate-900 dark:text-slate-200 text-sm font-semibold">
                 Email Address
               </span>
-              <input
-                type="email"
-                placeholder="name@example.com"
-                required
-                className="w-full h-12 px-4 rounded-default border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900/50 text-slate-900 dark:text-white placeholder:text-slate-400 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all"
+              <Input
+                name={'email'}
+                handleChange={handleChange}
+                placeholder={'name@example.com'}
+                autoComplete={'email'}
+                type={'email'}
+                className={`${errors?.errors?.email ? '!border-red-500' : ''}`}
               />
+              {errors?.errors?.email && (
+                <p className="text-red-500 text-sm mt-1">
+                  {errors?.errors?.email[0]}
+                </p>
+              )}
             </label>
 
             {/* Password */}
@@ -57,11 +147,15 @@ const Register = () => {
                 Password
               </span>
               <div className="relative">
-                <input
+                <Input
+                  name={'password'}
+                  handleChange={handleChange}
+                  placeholder={'••••••••'}
+                  autoComplete={'new-password'}
                   type={showPassword ? 'text' : 'password'}
-                  placeholder="••••••••"
-                  required
-                  className="w-full h-12 pl-4 pr-12 rounded-default border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900/50 text-slate-900 dark:text-white placeholder:text-slate-400 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all"
+                  className={`${
+                    errors?.errors?.password ? '!border-red-500' : ''
+                  }`}
                 />
                 <button
                   type="button"
@@ -74,6 +168,11 @@ const Register = () => {
                   </span>
                 </button>
               </div>
+              {errors?.errors?.password && (
+                <p className="text-red-500 text-sm mt-1">
+                  {errors?.errors?.password[0]}
+                </p>
+              )}
             </label>
 
             {/* Confirm Password */}
@@ -82,11 +181,17 @@ const Register = () => {
                 Confirm Password
               </span>
               <div className="relative">
-                <input
+                <Input
+                  name={'confirm_password'}
+                  handleChange={handleChange}
+                  placeholder={'••••••••'}
+                  autoComplete={'new-password'}
                   type={showConfirmPassword ? 'text' : 'password'}
-                  placeholder="••••••••"
-                  required
-                  className="w-full h-12 pl-4 pr-12 rounded-default border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900/50 text-slate-900 dark:text-white placeholder:text-slate-400 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all"
+                  className={`${
+                    errors?.errors?.password || errors?.message
+                      ? '!border-red-500'
+                      : ''
+                  }`}
                 />
                 <button
                   type="button"
@@ -99,14 +204,18 @@ const Register = () => {
                   </span>
                 </button>
               </div>
+              {checkPassword && (
+                <p className="text-red-500 text-sm mt-1">{checkPassword}</p>
+              )}
             </label>
 
             {/* Submit Button */}
             <button
               type="submit"
+              disabled={isLoading}
               className="mt-2 w-full bg-primary hover:bg-primary/90 text-white font-bold py-3.5 rounded-lg shadow-md hover:shadow-lg transition-all active:scale-[0.98]"
             >
-              Create Account
+              {isLoading ? 'Creating account...' : 'Create Account'}
             </button>
 
             {/* Divider */}

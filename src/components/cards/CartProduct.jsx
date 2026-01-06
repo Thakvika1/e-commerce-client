@@ -3,14 +3,14 @@ import React from 'react'
 const CartProduct = ({ image, qty, productName }) => {
   return (
     <>
-      <div className="p-6 flex flex-col sm:flex-row gap-6 group hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+      <div className="p-6 flex flex-col sm:flex-row gap-6 group hover:bg-slate-200 dark:hover:bg-slate-800/50 transition-colors">
         {/* <!-- Product Image --> */}
         <div
-          className="w-full sm:w-32 aspect-square rounded-lg bg-slate-100 dark:bg-slate-800 bg-cover bg-center shrink-0 border border-slate-200 dark:border-slate-700"
+          className="w-full sm:w-32 aspect-square rounded-lg  bg-cover bg-center shrink-0 border border-slate-200 dark:border-slate-700"
           data-alt="Wireless noise cancelling headphones on a stand"
           style={{
             backgroundImage:
-              "url('https://lh3.googleusercontent.com/aida-public/AB6AXuCrk1Dvy6VZd8L5LB-6MJWqZpKvT-1idW5CyRscZifmEefyI8gohGgbEUh8XZ9HRoL5Kd6Pd0yYCym3LiJGePEGgIlLJP3ntGYYHiBzcM6Fa2vKVr2OHkzon-SkNExsxZaoA4429g2AVJ2Bi-y1kPnxzyg12kjeXKVN6m2USJW0r0wxeJG5M4hjT1_6mPaXPoR9P37YdCGKrD69qhGkSyncxdJVDMlnfd_ZHpB9Udf4oPAwAlffYZi38aAyvTr2aBHrTruPmYUKjIo')",
+              'url(https://lh3.googleusercontent.com/aida-public/AB6AXuCrk1Dvy6VZd8L5LB-6MJWqZpKvT-1idW5CyRscZifmEefyI8gohGgbEUh8XZ9HRoL5Kd6Pd0yYCym3LiJGePEGgIlLJP3ntGYYHiBzcM6Fa2vKVr2OHkzon-SkNExsxZaoA4429g2AVJ2Bi-y1kPnxzyg12kjeXKVN6m2USJW0r0wxeJG5M4hjT1_6mPaXPoR9P37YdCGKrD69qhGkSyncxdJVDMlnfd_ZHpB9Udf4oPAwAlffYZi38aAyvTr2aBHrTruPmYUKjIo',
           }}
         ></div>
         {/* <!-- Details --> */}

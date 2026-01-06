@@ -12,13 +12,13 @@ const Navbar = ({ items = [] }) => {
   }
   return (
     <>
-      <nav className="sticky top-0 z-50 w-full bg-slate-50/90 dark:bg-slate-900/90 backdrop-blur-md border-b border-gray-200 dark:border-slate-700">
+      <nav className="sticky top-0 z-50 w-full backdrop-blur-md border-b border-gray-200 dark:border-slate-700">
         <div className="max-w-[960px] mx-auto px-4 md:px-10 py-3">
           <div className="flex items-center justify-between gap-4">
             {/* <!-- Logo --> */}
-            <div class="flex items-center gap-2 text-slate-900 dark:text-white cursor-pointer group">
+            <div className="flex items-center gap-2 text-slate-900 dark:text-white cursor-pointer group">
               <ButtonDarkMode />
-              <h2 class="text-xl font-bold tracking-tight">TikiShop</h2>
+              <h2 className="text-xl font-bold tracking-tight">TikiShop</h2>
             </div>
 
             {/* <!-- Right Actions --> */}

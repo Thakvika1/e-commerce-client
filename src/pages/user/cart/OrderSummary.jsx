@@ -6,7 +6,7 @@ const OrderSummary = () => {
       <div className="lg:col-span-4 relative">
         <div className="sticky top-24 flex flex-col gap-6">
           {/* <!-- Summary Card --> */}
-          <div className="bg-surface-light dark:bg-surface-dark rounded-xl shadow-sm border border-slate-100 dark:border-slate-800 p-6">
+          <div className=" rounded-xl shadow-sm border border-slate-100 dark:border-slate-800 p-6">
             <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-6">
               Order Summary
             </h3>
@@ -55,22 +55,6 @@ const OrderSummary = () => {
                 lock
               </span>
               Secure Checkout
-            </div>
-          </div>
-          {/* <!-- Coupon Code Card --> */}
-          <div className="bg-surface-light dark:bg-surface-dark rounded-xl shadow-sm border border-slate-100 dark:border-slate-800 p-6">
-            <h4 className="font-semibold text-slate-900 dark:text-white mb-3 text-sm">
-              Have a promo code?
-            </h4>
-            <div className="flex gap-2">
-              <input
-                className="flex-1 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg px-3 py-2 text-sm focus:ring-1 focus:ring-primary focus:border-primary"
-                placeholder="Enter code"
-                type="text"
-              />
-              <button className="bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-slate-200 dark:hover:bg-slate-700 font-medium px-4 py-2 rounded-lg text-sm transition-colors">
-                Apply
-              </button>
             </div>
           </div>
         </div>

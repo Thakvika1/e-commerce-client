@@ -9,19 +9,33 @@ import starbuck2 from './assets/images/starbuck2.jpg'
 import Register from './pages/authentication/Register'
 import Login from './pages/authentication/Login'
 import Cart from './pages/user/cart'
-
+import { useEffect, useState } from 'react'
+import Homepage from './pages/Homepage'
+import { useGetProductsQuery } from './services/productApi'
+import CreateProduct from './pages/admin/CreateProduct'
+import ProductDetail from './pages/ProductDetail'
+import { useGetAuthUserQuery } from './services/authApi'
+import { BrowserRouter } from 'react-router-dom'
+import HomepageRoute from './routes/HomepageRoute'
 
 const App = () => {
   return (
     <>
-      <Navbar items={data} />
+      {/* <Navbar items={data} /> */}
       {/* <Button /> */}
       {/* <ProductCard image={starbuck2} /> */}
-      <Cart />
+      {/* <Cart /> */}
 
       {/* <Login /> */}
       {/* <Register /> */}
-      <Footer />
+      {/* <ProductDetail /> */}
+      {/* <Homepage /> */}
+      {/* <CreateProduct /> */}
+      {/* {productData} */}
+      {/* <Footer /> */}
+      <BrowserRouter>
+        <HomepageRoute />
+      </BrowserRouter>
     </>
   )
 }

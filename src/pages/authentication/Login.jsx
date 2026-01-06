@@ -1,4 +1,9 @@
 import React, { useState } from 'react'
+import Input from '../../components/common/Input'
+import { useLoginUserMutation } from '../../services/authApi'
+import { useDispatch } from 'react-redux'
+import { setCredentials } from '../../features/authSlice'
+import { useSelector } from 'react-redux'
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false)
@@ -6,10 +11,63 @@ const Login = () => {
   // Toggle password visibility
   const togglePassword = () => setShowPassword(!showPassword)
 
+  const [errors, setErrors] = useState(null)
+
+  const [loginUser, { isLoading }] = useLoginUserMutation()
+  const dispatch = useDispatch()
+
+  const [formData, setFormData] = useState({
+    email: '',
+    password: '',
+  })
+
+  // check auth state
+  const auth = useSelector((state) => state.auth)
+  console.log('AUTH STATE:', auth)
+  
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    })
+    // setErrors(null)
+
+    setErrors((prev) => ({
+      ...prev,
+      errors: {
+        ...prev?.errors,
+        [e.target.name]: null,
+      },
+    }))
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    try {
+      const res = await loginUser(formData).unwrap()
+      console.log(res.access_token)
+
+      dispatch(
+        setCredentials({
+          token: res.access_token,
+          user: res.user,
+        })
+      )
+
+      alert('Login successfully!')
+    } catch (err) {
+      console.log(err)
+      if (err?.data) {
+        setErrors(err.data)
+      }
+    }
+  }
+
   return (
     <main className="flex-grow flex items-center justify-center p-4 sm:p-8 bg-background-light dark:bg-background-dark min-h-screen font-display">
       {/* Login Card */}
-      <div className="w-full max-w-[480px] bg-white dark:bg-[#1a2632] rounded-xl shadow-xl border border-slate-100 dark:border-slate-800 overflow-hidden transition-all">
+      <div className="w-full max-w-[480px]  rounded-xl shadow-xl border border-slate-100 dark:border-slate-800 overflow-hidden transition-all">
         <div className="p-8 sm:p-10 flex flex-col gap-6">
           {/* Headline */}
           <div className="text-center">
@@ -22,27 +80,30 @@ const Login = () => {
           </div>
 
           {/* Form */}
-          <form
-            className="flex flex-col gap-5 mt-2"
-            onSubmit={(e) => e.preventDefault()}
-          >
+          <form className="flex flex-col gap-5 mt-2" onSubmit={handleSubmit}>
             {/* Email Field */}
             <label className="flex flex-col gap-2">
               <span className="text-[#0d141b] dark:text-slate-200 text-sm font-semibold">
                 Email address
               </span>
               <div className="relative">
-                <input
-                  className="w-full rounded-lg text-[#0d141b] dark:text-white bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none h-12 px-4 pr-10 text-base transition-all placeholder:text-slate-400"
-                  placeholder="you@example.com"
-                  required
-                  type="email"
+                <Input
+                  name={'email'}
+                  placeholder={'you@gmail.com'}
+                  handleChange={handleChange}
+                  type={'email'}
+                  autoComplete={'email'}
+                  className={`${
+                    errors?.errors?.email || errors?.message
+                      ? '!border-red-500'
+                      : ''
+                  }`}
                 />
-                <div className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none flex items-center">
-                  <span className="material-symbols-outlined text-[20px]">
-                    mail
-                  </span>
-                </div>
+                {errors?.errors?.email && (
+                  <p className="text-red-500 text-sm mt-1">
+                    {errors.errors.email[0]}
+                  </p>
+                )}
               </div>
             </label>
 
@@ -60,11 +121,17 @@ const Login = () => {
                 </a>
               </div>
               <div className="relative">
-                <input
-                  className="w-full rounded-lg text-[#0d141b] dark:text-white bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none h-12 px-4 pr-12 text-base transition-all placeholder:text-slate-400"
-                  placeholder="••••••••"
-                  required
+                <Input
+                  name={'password'}
+                  placeholder={'••••••••'}
+                  handleChange={handleChange}
                   type={showPassword ? 'text' : 'password'}
+                  autoComplete={'current-password'}
+                  className={`${
+                    errors?.errors?.password || errors?.message
+                      ? '!border-red-500'
+                      : ''
+                  }`}
                 />
                 <button
                   type="button"
@@ -77,6 +144,14 @@ const Login = () => {
                   </span>
                 </button>
               </div>
+              {(errors?.errors?.password && (
+                <p className="text-red-500 text-sm mt-1">
+                  {errors.errors.password[0]}
+                </p>
+              )) ??
+                (errors?.message && (
+                  <p className="text-red-500 text-sm mt-1">{errors.message}</p>
+                ))}
             </label>
 
             {/* Submit Button */}
@@ -84,7 +159,7 @@ const Login = () => {
               className="w-full cursor-pointer items-center justify-center rounded-lg h-12 bg-primary hover:bg-primary/90 text-white text-base font-bold transition-all shadow-md active:scale-[0.98] mt-2"
               type="submit"
             >
-              Sign In
+              {isLoading ? 'Signing In...' : 'Sign In'}
             </button>
           </form>
 

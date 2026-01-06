@@ -3,6 +3,8 @@ import { useState } from 'react'
 import BlueDot from '../common/BlueDot'
 import MaterialLogo from '../common/MaterialLogo'
 import ButtonDarkMode from '../common/ButtonDarkMode'
+import useAuthUser from '../../hooks/useAuthUser'
+import useLogout from '../../hooks/useLogout'
 
 const Navbar = ({ items = [] }) => {
   const [showMenu, setShowMenu] = useState(false)
@@ -10,15 +12,22 @@ const Navbar = ({ items = [] }) => {
   const handleOnClick = () => {
     setShowMenu(!showMenu)
   }
+
+  const { logout } = useLogout()
+
+  const { user, isLoading, isLoggedIn } = useAuthUser()
+  if (isLoading) return null
+
   return (
     <>
       <nav className="sticky top-0 z-50 w-full backdrop-blur-md border-b border-gray-200 dark:border-slate-700">
         <div className="max-w-[960px] mx-auto px-4 md:px-10 py-3">
           <div className="flex items-center justify-between gap-4">
-            {/* <!-- Logo --> */}
             <div className="flex items-center gap-2 text-slate-900 dark:text-white cursor-pointer group">
               <ButtonDarkMode />
-              <h2 className="text-xl font-bold tracking-tight">TikiShop</h2>
+              <h2 className="text-xl font-bold tracking-tight">
+                {isLoggedIn ? `Hello ${user.name}` : 'Welcome'}
+              </h2>
             </div>
 
             {/* <!-- Right Actions --> */}
@@ -41,6 +50,12 @@ const Navbar = ({ items = [] }) => {
                 <MaterialLogo iconName={'shopping_cart'} />
                 <BlueDot />
               </button>
+              <button
+                onClick={logout}
+                className="relative p-2 text-slate-700 dark:text-slate-200 hover:bg-slate-200 dark:hover:bg-slate-800 rounded-lg transition-colors group cursor-pointer"
+              >
+                Logout
+              </button>
               {/* <!-- Mobile Menu Icon --> */}
               <button
                 onClick={handleOnClick}
@@ -59,7 +74,6 @@ const Navbar = ({ items = [] }) => {
                     ))}
                   </div>
                 )}
-                {/* <span className="material-symbols-outlined">menu</span> */}
                 <MaterialLogo iconName={'menu'} />
               </button>
             </div>

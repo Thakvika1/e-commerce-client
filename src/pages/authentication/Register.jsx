@@ -1,14 +1,22 @@
 import React, { useState } from 'react'
 import { useRegisterUserMutation } from '../../services/authApi'
 import Input from '../../components/common/Input'
+import { useNavigate } from 'react-router-dom'
 
 const Register = () => {
+  // register user mutation
   const [registerUser, { isLoading, error }] = useRegisterUserMutation()
 
+  // navigation hook
+  const navigate = useNavigate()
+
+  // errors state
   const [errors, setErrors] = useState(null)
 
+  // password match state
   const [checkPassword, setCheckPassword] = useState('')
 
+  // form data state
   const [form, setForm] = useState({
     name: '',
     email: '',
@@ -17,20 +25,20 @@ const Register = () => {
   })
 
   // validate data
-  const validateForm = () => {
-    const newErrors = {}
+  // const validateForm = () => {
+  //   const newErrors = {}
 
-    if (!form.name.trim()) newErrors.name = 'Name is required'
-    if (!form.email.trim()) newErrors.email = 'Email is required'
-    if (!form.password) newErrors.password = 'Password is required'
-    if (form.password.length < 8)
-      newErrors.password = 'Password must be at least 8 characters'
-    if (form.password !== form.confirm_password)
-      newErrors.confirm_password = 'Passwords do not match'
+  //   if (!form.name.trim()) newErrors.name = 'Name is required'
+  //   if (!form.email.trim()) newErrors.email = 'Email is required'
+  //   if (!form.password) newErrors.password = 'Password is required'
+  //   if (form.password.length < 8)
+  //     newErrors.password = 'Password must be at least 8 characters'
+  //   if (form.password !== form.confirm_password)
+  //     newErrors.confirm_password = 'Passwords do not match'
 
-    setErrors({ errors: newErrors })
-    return Object.keys(newErrors).length === 0
-  }
+  //   setErrors({ errors: newErrors })
+  //   return Object.keys(newErrors).length === 0
+  // }
 
   const handleChange = (e) => {
     setForm({
@@ -55,7 +63,7 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault()
 
-    if (!validateForm()) return
+    // if (!validateForm()) return
 
     // password mismatch check
     if (form.password !== form.confirm_password) {
@@ -69,13 +77,14 @@ const Register = () => {
     try {
       const res = await registerUser(form).unwrap()
       setErrors(null)
-      setForm({
-        name: '',
-        email: '',
-        password: '',
-        confirm_password: '',
-      })
-      alert('Registered successfully!')
+      navigate('/login')
+      // setForm({
+      //   name: '',
+      //   email: '',
+      //   password: '',
+      //   confirm_password: '',
+      // })
+
       // console.log(res)
     } catch (err) {
       console.log(err)

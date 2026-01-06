@@ -42,6 +42,7 @@ export const authApi = createApi({
         body: userData,
       }),
     }),
+
     getAuthUser: builder.query({
       query: () => 'user',
     }),

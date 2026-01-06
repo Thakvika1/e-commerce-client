@@ -4,7 +4,7 @@ export const productApi = createApi({
   reducerPath: 'productApi',
   baseQuery: fetchBaseQuery({
     baseUrl: 'http://127.0.0.1:8000/api',
-    credentials: 'include',
+    // credentials: 'include',
   }),
 
   endpoints: (builder) => ({

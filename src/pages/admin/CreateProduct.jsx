@@ -5,7 +5,7 @@ import { useCreateProductMutation } from '../../services/productApi'
 const CreateProduct = () => {
   const [createProduct, { isLoading, error }] = useCreateProductMutation()
 
-  const [formData, setFormData] = useState({
+  const [newProduct, setNewProduct] = useState({
     name: '',
     price: '',
     stock: '',
@@ -13,8 +13,8 @@ const CreateProduct = () => {
   })
 
   const handleChange = (e) => {
-    setFormData({
-      ...formData,
+    setNewProduct({
+      ...newProduct,
       [e.target.name]: e.target.value,
     })
   }
@@ -22,7 +22,7 @@ const CreateProduct = () => {
   const handleOnSubmit = async (e) => {
     e.preventDefault()
     try {
-      await createProduct(formData).unwrap()
+      await createProduct(newProduct).unwrap()
       alert('Product Created')
     } catch (err) {
       console.log(err)

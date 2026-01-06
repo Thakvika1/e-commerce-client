@@ -1,10 +1,12 @@
 import { Navigate } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import useAuthUser from '../hooks/useAuthUser'
 
 const ProtectedRoute = ({ children }) => {
-  const isAuth = useSelector((state) => state.auth.isAuthenticated)
+  const { user, isLoading } = useAuthUser()
 
-  if (!isAuth) return <Navigate to="/login" /> // kick to login if not logged in
+  if (isLoading) return null
+
+  if (user?.role !== 'admin' || !user) return <Navigate to="/" />
 
   return children
 }

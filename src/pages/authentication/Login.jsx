@@ -4,9 +4,12 @@ import { useLoginUserMutation } from '../../services/authApi'
 import { useDispatch } from 'react-redux'
 import { setCredentials } from '../../features/authSlice'
 import { useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false)
+
+  const navigate = useNavigate()
 
   // Toggle password visibility
   const togglePassword = () => setShowPassword(!showPassword)
@@ -24,14 +27,12 @@ const Login = () => {
   // check auth state
   const auth = useSelector((state) => state.auth)
   console.log('AUTH STATE:', auth)
-  
 
   const handleChange = (e) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
     })
-    // setErrors(null)
 
     setErrors((prev) => ({
       ...prev,
@@ -54,8 +55,8 @@ const Login = () => {
           user: res.user,
         })
       )
-
-      alert('Login successfully!')
+      setErrors(null)
+      navigate('/')
     } catch (err) {
       console.log(err)
       if (err?.data) {
@@ -158,6 +159,7 @@ const Login = () => {
             <button
               className="w-full cursor-pointer items-center justify-center rounded-lg h-12 bg-primary hover:bg-primary/90 text-white text-base font-bold transition-all shadow-md active:scale-[0.98] mt-2"
               type="submit"
+              disabled={isLoading}
             >
               {isLoading ? 'Signing In...' : 'Sign In'}
             </button>

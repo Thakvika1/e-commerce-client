@@ -1,9 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
-  token: null,
+  // token: null,
+  // Check localStorage on startup to maintain session
+  token: localStorage.getItem('token') || null,
   user: null,
-  isAuthenticated: false,
 }
 
 const authSlice = createSlice({
@@ -13,12 +14,13 @@ const authSlice = createSlice({
     setCredentials: (state, action) => {
       state.token = action.payload.token
       state.user = action.payload.user
-      state.isAuthenticated = true
+      // Persist token so it survives a page refresh
+      localStorage.setItem('token', action.payload.token)
     },
     clearAuth: (state) => {
       state.token = null
       state.user = null
-      state.isAuthenticated = false
+      localStorage.removeItem('token')
     },
   },
 })

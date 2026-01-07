@@ -4,7 +4,7 @@ import BlueDot from '../common/BlueDot'
 import MaterialLogo from '../common/MaterialLogo'
 import ButtonDarkMode from '../common/ButtonDarkMode'
 import useAuthUser from '../../hooks/useAuthUser'
-import useLogout from '../../hooks/useLogout'
+// import { useSelector } from 'react-redux'
 
 const HomeNavbar = ({ items = [] }) => {
   const [showMenu, setShowMenu] = useState(false)
@@ -13,7 +13,8 @@ const HomeNavbar = ({ items = [] }) => {
     setShowMenu(!showMenu)
   }
 
-  const { logout } = useLogout()
+  // const auth = useSelector((state) => state.auth)
+  // console.log('auth in navbar:', auth)
 
   const { user, isLoading, isLoggedIn } = useAuthUser()
   if (isLoading) return null

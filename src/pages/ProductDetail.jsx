@@ -1,17 +1,10 @@
 import React from 'react'
-import useAuthUser from '../hooks/useAuthUser'
+import ProductCardSkeleton from '../components/cards/ProductCardSkeleton'
 
 const ProductDetail = () => {
-  const { user, isLoading } = useAuthUser()
-
-  if (isLoading) return null
-
   return (
     <>
-      <>
-        <h1>{user?.name}</h1>
-        <h1>{user?.role}</h1>
-      </>
+      <ProductCardSkeleton />
     </>
   )
 }

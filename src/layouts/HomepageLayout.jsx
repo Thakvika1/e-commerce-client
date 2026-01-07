@@ -1,13 +1,13 @@
 import React from 'react'
-import Navbar from '../components/layout/Navbar'
+import HomeNavbar from '../components/layout/HomeNavbar'
 import Footer from '../components/layout/Footer'
 import { Outlet } from 'react-router-dom'
-import { data } from '../data/navbarData'
+import { navbarData } from '../data/navbarData'
 
 const HomepageLayout = () => {
   return (
     <>
-      <Navbar items={data} />
+      <HomeNavbar items={navbarData} />
       <Outlet />
       <Footer />
     </>

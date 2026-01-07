@@ -6,7 +6,7 @@ import ButtonDarkMode from '../common/ButtonDarkMode'
 import useAuthUser from '../../hooks/useAuthUser'
 import useLogout from '../../hooks/useLogout'
 
-const Navbar = ({ items = [] }) => {
+const HomeNavbar = ({ items = [] }) => {
   const [showMenu, setShowMenu] = useState(false)
 
   const handleOnClick = () => {
@@ -50,12 +50,7 @@ const Navbar = ({ items = [] }) => {
                 <MaterialLogo iconName={'shopping_cart'} />
                 <BlueDot />
               </button>
-              <button
-                onClick={logout}
-                className="relative p-2 text-slate-700 dark:text-slate-200 hover:bg-slate-200 dark:hover:bg-slate-800 rounded-lg transition-colors group cursor-pointer"
-              >
-                Logout
-              </button>
+
               {/* <!-- Mobile Menu Icon --> */}
               <button
                 onClick={handleOnClick}
@@ -84,4 +79,4 @@ const Navbar = ({ items = [] }) => {
   )
 }
 
-export default Navbar
+export default HomeNavbar

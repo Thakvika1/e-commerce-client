@@ -1,5 +1,6 @@
 import React from 'react'
 import Button from '../common/Button'
+import ProductCardSkeleton from './ProductCardSkeleton'
 
 const ProductCard = ({
   productImage,
@@ -7,6 +8,7 @@ const ProductCard = ({
   productPrice,
   // productQty,
   productDesciption,
+  isLoading,
 }) => {
   return (
     <>

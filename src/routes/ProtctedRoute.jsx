@@ -2,11 +2,11 @@ import { Navigate } from 'react-router-dom'
 import useAuthUser from '../hooks/useAuthUser'
 
 const ProtectedRoute = ({ children }) => {
-  const { user, isLoading } = useAuthUser()
+  const { isLoggedIn, isLoading } = useAuthUser()
 
   if (isLoading) return null
 
-  if (user?.role !== 'admin' || !user) return <Navigate to="/" />
+  if (!isLoggedIn) return <Navigate to="/" />
 
   return children
 }

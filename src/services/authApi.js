@@ -18,6 +18,8 @@ const baseQueryWithAuth = async (args, api, extraOptions) => {
 
   if (result.error?.status === 401) {
     api.dispatch(clearAuth())
+    // Clear EVERYTHING that RTK Query knows about authApi
+    api.dispatch(authApi.util.resetApiState())
   }
 
   return result

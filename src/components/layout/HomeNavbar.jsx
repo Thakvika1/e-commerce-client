@@ -5,7 +5,9 @@ import MaterialLogo from '../common/MaterialLogo'
 import ButtonDarkMode from '../common/ButtonDarkMode'
 // import { useSelector } from 'react-redux'
 
-const HomeNavbar = ({ items = [],isLoggedIn = false, username }) => {
+const HomeNavbar = ({ items = [], 
+  isLoggedIn = false, 
+  username = '' }) => {
   const [showMenu, setShowMenu] = useState(false)
 
   const handleOnClick = () => {
@@ -23,7 +25,8 @@ const HomeNavbar = ({ items = [],isLoggedIn = false, username }) => {
             <div className="flex items-center gap-2 text-slate-900 dark:text-white cursor-pointer group">
               <ButtonDarkMode />
               <h2 className="text-xl font-bold tracking-tight">
-                {isLoggedIn ? `Hello ${username}` : 'Welcome'}
+                {isLoggedIn ? `Welcome ${username}` : 'Welcome'}
+                {/* {`Welcome ${username}`} */}
               </h2>
             </div>
 

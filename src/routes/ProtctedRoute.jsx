@@ -6,7 +6,7 @@ const ProtectedRoute = ({ children }) => {
 
   if (isLoading) return null
 
-  if (!isLoggedIn) return <Navigate to="/" />
+  if (!isLoggedIn) return <Navigate to="/" replace />
 
   return children
 }

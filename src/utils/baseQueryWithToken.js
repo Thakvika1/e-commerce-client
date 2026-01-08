@@ -1,6 +1,6 @@
 import { fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { clearAuth } from '../features/authSlice'
-import { authApi } from './authApi'
+// import { clearAuth } from '../features/authSlice'
+// import { authApi } from './authApi'
 
 export const baseQueryWithToken = fetchBaseQuery({
   baseUrl: 'http://127.0.0.1:8000/api',

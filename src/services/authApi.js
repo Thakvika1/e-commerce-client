@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { clearAuth } from '../features/authSlice'
-import { baseQueryWithToken } from './baseQueryWithToken'
+import { baseQueryWithToken } from '../utils/baseQueryWithToken'
 
 export const authApi = createApi({
   reducerPath: 'authApi',

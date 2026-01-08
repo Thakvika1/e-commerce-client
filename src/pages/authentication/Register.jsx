@@ -2,19 +2,28 @@ import React, { useState } from 'react'
 import { useRegisterUserMutation } from '../../services/authApi'
 import Input from '../../components/common/Input'
 import { useNavigate } from 'react-router-dom'
+import { validateForm } from '../../utils/validateForm'
 
 const Register = () => {
+  // validation rules
+  const rules = {
+    name: {
+      required: true,
+      // onlyLetters: true
+    },
+    email: { required: true, email: true },
+    password: { required: true, minLength: 8 },
+    confirm_password: { required: true, match: 'password' },
+  }
+
   // register user mutation
-  const [registerUser, { isLoading, error }] = useRegisterUserMutation()
+  const [registerUser, { isLoading }] = useRegisterUserMutation()
 
   // navigation hook
   const navigate = useNavigate()
 
   // errors state
   const [errors, setErrors] = useState(null)
-
-  // password match state
-  const [checkPassword, setCheckPassword] = useState(null)
 
   // form data state
   const [form, setForm] = useState({
@@ -24,45 +33,28 @@ const Register = () => {
     confirm_password: '',
   })
 
-  // validate data
-  // const validateForm = () => {
-  //   const newErrors = {}
-
-  //   if (!form.name.trim()) newErrors.name = 'Name is required'
-  //   if (!form.email.trim()) newErrors.email = 'Email is required'
-  //   if (!form.password) newErrors.password = 'Password is required'
-  //   if (form.password.length < 8)
-  //     newErrors.password = 'Password must be at least 8 characters'
-  //   if (form.password !== form.confirm_password)
-  //     newErrors.confirm_password = 'Passwords do not match'
-
-  //   setErrors({ errors: newErrors })
-  //   return Object.keys(newErrors).length === 0
-  // }
-
   const handleChange = (e) => {
-    setForm({
-      ...form,
-      [e.target.name]: e.target.value,
-    })
+    const { name, value } = e.target
+
+    setForm((prev) => ({
+      ...prev,
+      [name]: value,
+    }))
 
     setErrors((prev) => ({
       ...prev,
-      errors: {
-        ...prev?.errors,
-        [e.target.name]: null,
-      },
+      [name]: null,
     }))
-
-    setCheckPassword(null)
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
 
-    // password mismatch check
-    if (form.password !== form.confirm_password) {
-      setCheckPassword('Password does not match')
+    // frontend validate
+    const validationErrors = validateForm(form, rules)
+
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors)
       return
     }
 
@@ -75,6 +67,7 @@ const Register = () => {
     } catch (err) {
       console.log(err)
 
+      // backend validate
       if (err?.data) {
         setErrors(err.data)
       }
@@ -113,7 +106,15 @@ const Register = () => {
                 placeholder={'John Doe'}
                 autoComplete={'username'}
                 type={'text'}
+                className={`${
+                  errors?.name || errors?.errors?.name ? '!border-red-500' : ''
+                }`}
               />
+              {(errors?.name || errors?.errors?.name) && (
+                <p className="text-red-500 text-sm mt-1">
+                  {errors?.name || errors?.errors?.name[0]}
+                </p>
+              )}
             </label>
 
             {/* Email */}
@@ -127,11 +128,15 @@ const Register = () => {
                 placeholder={'name@example.com'}
                 autoComplete={'email'}
                 type={'email'}
-                className={`${errors?.errors?.email ? '!border-red-500' : ''}`}
+                className={`${
+                  errors?.email || errors?.errors?.email
+                    ? '!border-red-500'
+                    : ''
+                }`}
               />
-              {errors?.errors?.email && (
+              {(errors?.email || errors?.errors?.email) && (
                 <p className="text-red-500 text-sm mt-1">
-                  {errors?.errors?.email[0]}
+                  {errors?.email || errors?.errors?.email[0]}
                 </p>
               )}
             </label>
@@ -149,7 +154,9 @@ const Register = () => {
                   autoComplete={'new-password'}
                   type={showPassword ? 'text' : 'password'}
                   className={`${
-                    errors?.errors?.password ? '!border-red-500' : ''
+                    errors?.password || errors?.errors?.password
+                      ? '!border-red-500'
+                      : ''
                   }`}
                 />
                 <button
@@ -163,9 +170,17 @@ const Register = () => {
                   </span>
                 </button>
               </div>
-              {errors?.errors?.password && (
+              {(errors?.password && (
+                <p className="text-red-500 text-sm mt-1">{errors.password}</p>
+              )) ||
+                (errors?.errors?.password && (
+                  <p className="text-red-500 text-sm mt-1">
+                    {errors?.errors?.password[0]}
+                  </p>
+                ))}
+              {errors?.password && errors?.errors?.password && (
                 <p className="text-red-500 text-sm mt-1">
-                  {errors?.errors?.password[0]}
+                  {errors?.password || errors?.errors?.password[0]}
                 </p>
               )}
             </label>
@@ -182,7 +197,9 @@ const Register = () => {
                   placeholder={'••••••••'}
                   autoComplete={'new-password'}
                   type={showConfirmPassword ? 'text' : 'password'}
-                  className={`${checkPassword ? '!border-red-500' : ''}`}
+                  className={`${
+                    errors?.confirm_password ? '!border-red-500' : ''
+                  }`}
                 />
                 <button
                   type="button"
@@ -195,8 +212,10 @@ const Register = () => {
                   </span>
                 </button>
               </div>
-              {checkPassword && (
-                <p className="text-red-500 text-sm mt-1">{checkPassword}</p>
+              {errors?.confirm_password && (
+                <p className="text-red-500 text-sm mt-1">
+                  {errors.confirm_password}
+                </p>
               )}
             </label>
 
@@ -251,7 +270,7 @@ const Register = () => {
               <p className="text-center text-slate-600 dark:text-slate-400 text-sm">
                 Already have an account?{' '}
                 <a
-                  href="#"
+                  href="/login"
                   className="text-primary font-black hover:underline ml-1"
                 >
                   Login

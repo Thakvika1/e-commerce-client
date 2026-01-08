@@ -41,7 +41,6 @@ const Login = () => {
         [e.target.name]: null,
       },
     }))
-
   }
 
   const handleSubmit = async (e) => {
@@ -171,7 +170,7 @@ const Login = () => {
             </p>
             <a
               className="text-primary font-bold text-sm hover:underline"
-              href="#"
+              href="/register"
             >
               Register
             </a>

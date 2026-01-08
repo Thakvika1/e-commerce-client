@@ -8,6 +8,7 @@ import ProductCardSkeleton from '../components/cards/ProductCardSkeleton'
 const Homepage = () => {
   const { data, error, isLoading } = useGetProductsQuery()
 
+
   if (error) return <p>Something went wrong</p>
   // if (isLoading) return <p>Loading...</p>
 

@@ -7,6 +7,7 @@ const useAuthUser = () => {
   const { data, isLoading, error } = useGetAuthUserQuery(undefined, {
     skip: !token,
   })
+  
 
   return {
     user: data?.user ?? null,

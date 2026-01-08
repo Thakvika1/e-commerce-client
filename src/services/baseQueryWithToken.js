@@ -1,7 +1,8 @@
 import { fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { clearAuth } from '../features/authSlice'
+import { authApi } from './authApi'
 
-const rawBaseQuery = fetchBaseQuery({
+export const baseQueryWithToken = fetchBaseQuery({
   baseUrl: 'http://127.0.0.1:8000/api',
   prepareHeaders: (headers, { getState }) => {
     const token = getState().auth.token
@@ -15,13 +16,13 @@ const rawBaseQuery = fetchBaseQuery({
   },
 })
 
-export const baseQueryWithAuth = async (args, api, extraOptions) => {
-  const result = await rawBaseQuery(args, api, extraOptions)
+// export const baseQueryWithAuth = async (args, api, extraOptions) => {
+//   const result = await rawBaseQuery(args, api, extraOptions)
 
-  if (result.error?.status === 401) {
-    api.dispatch(clearAuth())
-    api.dispatch(api.util.resetApiState())
-  }
+//   if (result.error?.status === 401) {
+//     api.dispatch(clearAuth())
+//     api.dispatch(authApi.util.resetApiState())
+//   }
 
-  return result
-}
+//   return result
+// }

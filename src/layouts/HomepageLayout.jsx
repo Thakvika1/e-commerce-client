@@ -6,13 +6,17 @@ import { navbarData } from '../data/navbarData'
 import useAuthUser from '../hooks/useAuthUser'
 
 const HomepageLayout = () => {
-  const { user, isLoading } = useAuthUser()
+  const { user, isLoading, isLoggedIn } = useAuthUser()
 
   if (isLoading) return null
 
   return (
     <>
-      <HomeNavbar items={navbarData} username={user?.name} />
+      <HomeNavbar
+        items={navbarData}
+        isLoggedIn={isLoggedIn}
+        username={user?.name}
+      />
       <Outlet />
       <Footer />
     </>

@@ -58,7 +58,7 @@ const Login = () => {
       setErrors(null)
       navigate('/')
     } catch (err) {
-      console.log(err)
+      console.log('error : ', err)
       if (err?.data) {
         setErrors(err.data)
       }

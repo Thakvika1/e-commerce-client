@@ -54,7 +54,6 @@ const Register = () => {
       },
     }))
 
-    setErrors(null)
     setCheckPassword(null)
   }
 

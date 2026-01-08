@@ -25,8 +25,8 @@ const Login = () => {
   })
 
   // check auth state
-  const auth = useSelector((state) => state.auth)
-  console.log('AUTH STATE:', auth)
+  // const auth = useSelector((state) => state.auth)
+  // console.log('AUTH STATE:', auth)
 
   const handleChange = (e) => {
     setFormData({
@@ -42,7 +42,6 @@ const Login = () => {
       },
     }))
 
-    setErrors(null)
   }
 
   const handleSubmit = async (e) => {
@@ -57,7 +56,6 @@ const Login = () => {
           user: res.user,
         })
       )
-      setErrors(null)
       navigate('/')
     } catch (err) {
       console.log('error : ', err)
@@ -140,7 +138,6 @@ const Login = () => {
                   type="button"
                   onClick={togglePassword}
                   className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-primary transition-colors flex items-center"
-                  aria-label={showPassword ? 'Hide password' : 'Show password'}
                 >
                   <span className="material-symbols-outlined text-[22px]">
                     {showPassword ? 'visibility' : 'visibility_off'}

@@ -14,7 +14,7 @@ const Register = () => {
   const [errors, setErrors] = useState(null)
 
   // password match state
-  const [checkPassword, setCheckPassword] = useState('')
+  const [checkPassword, setCheckPassword] = useState(null)
 
   // form data state
   const [form, setForm] = useState({
@@ -54,16 +54,12 @@ const Register = () => {
       },
     }))
 
-    // clear password mismatch when typing
-    if (e.target.name === 'password' || e.target.name === 'confirm_password') {
-      setCheckPassword('')
-    }
+    setErrors(null)
+    setCheckPassword(null)
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-
-    // if (!validateForm()) return
 
     // password mismatch check
     if (form.password !== form.confirm_password) {
@@ -71,19 +67,10 @@ const Register = () => {
       return
     }
 
-    // clear error if matched
-    setCheckPassword('')
-
     try {
       const res = await registerUser(form).unwrap()
-      setErrors(null)
+      // setErrors(null)
       navigate('/login')
-      // setForm({
-      //   name: '',
-      //   email: '',
-      //   password: '',
-      //   confirm_password: '',
-      // })
 
       // console.log(res)
     } catch (err) {
@@ -196,11 +183,7 @@ const Register = () => {
                   placeholder={'••••••••'}
                   autoComplete={'new-password'}
                   type={showConfirmPassword ? 'text' : 'password'}
-                  className={`${
-                    errors?.errors?.password || errors?.message
-                      ? '!border-red-500'
-                      : ''
-                  }`}
+                  className={`${checkPassword ? '!border-red-500' : ''}`}
                 />
                 <button
                   type="button"

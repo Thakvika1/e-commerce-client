@@ -10,8 +10,8 @@ const useLogout = () => {
   const logout = async () => {
     try {
       await logoutUser().unwrap()
-      dispactch(authApi.util.resetApiState())
       dispactch(clearAuth())
+      dispactch(authApi.util.resetApiState())
     } catch (err) {
       console.log('Logout API failed')
     }

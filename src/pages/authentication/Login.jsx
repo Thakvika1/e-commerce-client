@@ -41,6 +41,8 @@ const Login = () => {
         [e.target.name]: null,
       },
     }))
+
+    setErrors(null)
   }
 
   const handleSubmit = async (e) => {

@@ -3,7 +3,6 @@ import Input from '../../components/common/Input'
 import { useLoginUserMutation } from '../../services/authApi'
 import { useDispatch } from 'react-redux'
 import { setCredentials } from '../../features/authSlice'
-import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { validateForm } from '../../utils/validateForm'
 
@@ -30,10 +29,6 @@ const Login = () => {
     email: '',
     password: '',
   })
-
-  // check auth state
-  // const auth = useSelector((state) => state.auth)
-  // console.log('AUTH STATE:', auth)
 
   const handleChange = (e) => {
     const { name, value } = e.target

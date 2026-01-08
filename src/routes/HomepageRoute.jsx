@@ -9,14 +9,16 @@ import ProductDetail from '../pages/ProductDetail'
 import PublicRoute from './PublicRoute'
 import UserDetail from '../pages/UserDetail'
 import AdminRoute from './AdminRoute'
-import AuthPageLayout from '../layouts/AuthPageLayout'
 import Home from '../pages/home'
+import { HOME } from '../config/routes'
+import { LOGIN } from '../config/routes'
+import { REGISTER } from '../config/routes'
 
 const HomepageRoute = () => {
   // route that already login can't access
   const publicRoutes = [
-    { path: '/login', element: <Login /> },
-    { path: '/register', element: <Register /> },
+    { path: LOGIN, element: <Login /> },
+    { path: REGISTER, element: <Register /> },
   ]
 
   // auth route that need login to access
@@ -25,7 +27,8 @@ const HomepageRoute = () => {
   return (
     <Routes>
       <Route element={<HomepageLayout />}>
-        <Route path="/" element={<Home />} />
+        {/* everyone can access  */}
+        <Route path={HOME} element={<Home />} />
 
         {/* Admin protected route */}
         <Route
@@ -37,7 +40,7 @@ const HomepageRoute = () => {
           }
         />
 
-        {/* Public routes */}
+        {/* user already logged in cannot access routes */}
         {publicRoutes.map(({ path, element }) => (
           <Route
             key={path}
@@ -46,7 +49,7 @@ const HomepageRoute = () => {
           />
         ))}
 
-        {/* Auth routes */}
+        {/* Only for logged in user*/}
         {authRoute.map(({ path, element }) => (
           <Route
             key={path}
@@ -57,15 +60,6 @@ const HomepageRoute = () => {
 
         <Route path="/product-detail" element={<ProductDetail />} />
       </Route>
-      {/* <Route element={<AuthPageLayout />}>
-        {publicRoutes.map(({ path, element }) => (
-          <Route
-            key={path}
-            path={path}
-            element={<PublicRoute>{element}</PublicRoute>}
-          />
-        ))}
-      </Route> */}
     </Routes>
   )
 }

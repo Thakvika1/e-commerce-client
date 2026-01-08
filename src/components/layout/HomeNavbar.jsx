@@ -43,7 +43,7 @@ const HomeNavbar = ({ items = [], username }) => {
                 })}
               </div>
               <button className="relative p-2 text-slate-700 dark:text-slate-200 hover:bg-slate-200 dark:hover:bg-slate-800 rounded-lg transition-colors group cursor-pointer">
-                <MaterialLogo iconName={'shopping_cart'} />
+                <MaterialLogo>shopping_cart</MaterialLogo>
                 <BlueDot />
               </button>
 
@@ -65,7 +65,7 @@ const HomeNavbar = ({ items = [], username }) => {
                     ))}
                   </div>
                 )}
-                <MaterialLogo iconName={'menu'} />
+                <MaterialLogo>menu</MaterialLogo>
               </button>
             </div>
           </div>

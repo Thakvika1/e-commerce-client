@@ -1,6 +1,7 @@
 import { Navigate } from 'react-router-dom'
 import useAuthUser from '../hooks/useAuthUser'
 import { useSelector } from 'react-redux'
+import { HOME } from '../config/routes'
 
 const AdminRoute = ({ children }) => {
   const { user, isLoading } = useAuthUser()
@@ -9,7 +10,7 @@ const AdminRoute = ({ children }) => {
 
   if (isLoading) return null
 
-  if (user?.role !== 'admin' || !auth) return <Navigate to="/" replace />
+  if (user?.role !== 'admin' || !auth) return <Navigate to={HOME} replace />
 
   return children
 }

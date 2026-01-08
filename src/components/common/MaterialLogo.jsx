@@ -1,9 +1,11 @@
 import React from 'react'
 
-const MaterialLogo = ({ iconName }) => {
+const MaterialLogo = ({ children, className = '' }) => {
   return (
     <>
-      <span className="material-symbols-outlined">{iconName}</span>
+      <span className={`material-symbols-outlined ${className}`}>
+        {children}
+      </span>
     </>
   )
 }

@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import starbuck from '../assets/images/starbuck.avif'
 import { useGetProductsQuery } from '../services/productApi'
 import ProductCardSkeleton from '../components/cards/ProductCardSkeleton'
+import { useSelector } from 'react-redux'
 
 const Homepage = () => {
   const { data, error, isLoading } = useGetProductsQuery()
@@ -12,6 +13,9 @@ const Homepage = () => {
   // if (isLoading) return <p>Loading...</p>
 
   // console.log(data)
+
+  const auth = useSelector((state) => state.auth)
+  console.log('AUTH STATE:', auth)
 
   const lenthData = data?.data?.data.length || 6
 

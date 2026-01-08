@@ -4,7 +4,7 @@ import ProductCardSkeleton from '../components/cards/ProductCardSkeleton'
 const ProductDetail = () => {
   return (
     <>
-      <ProductCardSkeleton />
+      {/* <ProductCardSkeleton /> */}
     </>
   )
 }

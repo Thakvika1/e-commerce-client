@@ -1,12 +1,10 @@
-import { Navigate } from 'react-router-dom'
-import useAuthUser from '../hooks/useAuthUser'
+import { Navigate, useSearchParams } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
 const ProtectedRoute = ({ children }) => {
-  const { isLoggedIn, isLoading } = useAuthUser()
+  const auth = useSelector((state) => state.auth.isAuthenticated)
 
-  if (isLoading) return null
-
-  if (!isLoggedIn) return <Navigate to="/" replace />
+  if (!auth) return <Navigate to="/" replace />
 
   return children
 }

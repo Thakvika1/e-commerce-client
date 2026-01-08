@@ -3,19 +3,16 @@ import { useState } from 'react'
 import BlueDot from '../common/BlueDot'
 import MaterialLogo from '../common/MaterialLogo'
 import ButtonDarkMode from '../common/ButtonDarkMode'
-// import { useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 
-const HomeNavbar = ({ items = [], 
-  isLoggedIn = false, 
-  username = '' }) => {
+const HomeNavbar = ({ items = [], username }) => {
   const [showMenu, setShowMenu] = useState(false)
 
   const handleOnClick = () => {
     setShowMenu(!showMenu)
   }
 
-  // const auth = useSelector((state) => state.auth)
-  // console.log('auth in navbar:', auth)
+  const auth = useSelector((state) => state.auth.isAuthenticated)
 
   return (
     <>
@@ -25,8 +22,7 @@ const HomeNavbar = ({ items = [],
             <div className="flex items-center gap-2 text-slate-900 dark:text-white cursor-pointer group">
               <ButtonDarkMode />
               <h2 className="text-xl font-bold tracking-tight">
-                {isLoggedIn ? `Welcome ${username}` : 'Welcome'}
-                {/* {`Welcome ${username}`} */}
+                {auth ? `Welcome ${username}` : 'Welcome'}
               </h2>
             </div>
 

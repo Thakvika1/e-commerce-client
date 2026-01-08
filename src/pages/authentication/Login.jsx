@@ -5,8 +5,15 @@ import { useDispatch } from 'react-redux'
 import { setCredentials } from '../../features/authSlice'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+import { validateForm } from '../../utils/validateForm'
 
 const Login = () => {
+  // validation rules
+  const rules = {
+    email: { required: true, email: true },
+    password: { required: true, minLength: 8 },
+  }
+
   const [showPassword, setShowPassword] = useState(false)
 
   const navigate = useNavigate()
@@ -29,22 +36,30 @@ const Login = () => {
   // console.log('AUTH STATE:', auth)
 
   const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    })
+    const { name, value } = e.target
+
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }))
 
     setErrors((prev) => ({
       ...prev,
-      errors: {
-        ...prev?.errors,
-        [e.target.name]: null,
-      },
+      [name]: null,
     }))
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+
+    // frontend validate
+    const validationErrors = validateForm(formData, rules)
+
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors)
+      return
+    }
+
     try {
       const res = await loginUser(formData).unwrap()
       console.log(res.access_token)
@@ -94,14 +109,14 @@ const Login = () => {
                   type={'email'}
                   autoComplete={'email'}
                   className={`${
-                    errors?.errors?.email || errors?.message
+                    errors?.errors?.email || errors?.message || errors?.email
                       ? '!border-red-500'
                       : ''
                   }`}
                 />
-                {errors?.errors?.email && (
+                {(errors?.email || errors?.errors?.email) && (
                   <p className="text-red-500 text-sm mt-1">
-                    {errors.errors.email[0]}
+                    {errors?.email || errors.errors.email[0]}
                   </p>
                 )}
               </div>
@@ -128,7 +143,9 @@ const Login = () => {
                   type={showPassword ? 'text' : 'password'}
                   autoComplete={'current-password'}
                   className={`${
-                    errors?.errors?.password || errors?.message
+                    errors?.errors?.password ||
+                    errors?.message ||
+                    errors?.password
                       ? '!border-red-500'
                       : ''
                   }`}
@@ -143,14 +160,15 @@ const Login = () => {
                   </span>
                 </button>
               </div>
-              {(errors?.errors?.password && (
+              {(errors?.password ||
+                errors?.errors?.password ||
+                errors?.message) && (
                 <p className="text-red-500 text-sm mt-1">
-                  {errors.errors.password[0]}
+                  {errors?.password ||
+                    errors?.errors?.password[0] ||
+                    errors?.message}
                 </p>
-              )) ??
-                (errors?.message && (
-                  <p className="text-red-500 text-sm mt-1">{errors.message}</p>
-                ))}
+              )}
             </label>
 
             {/* Submit Button */}

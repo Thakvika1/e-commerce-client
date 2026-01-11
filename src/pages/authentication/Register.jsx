@@ -33,6 +33,8 @@ const Register = () => {
     confirm_password: '',
   })
 
+  
+  // Handle input change
   const handleChange = (e) => {
     const { name, value } = e.target
 
@@ -47,6 +49,8 @@ const Register = () => {
     }))
   }
 
+
+  // Handle form submit
   const handleSubmit = async (e) => {
     e.preventDefault()
 

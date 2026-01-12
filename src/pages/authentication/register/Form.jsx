@@ -21,7 +21,7 @@ const Form = () => {
 
   const register = async (data) => {
     try {
-      const res = await registerUser(data).unwrap()
+      await registerUser(data).unwrap()
       // setErrors(null)
       navigate('/login')
 
@@ -54,7 +54,7 @@ const Form = () => {
           type={'text'}
           className={errorBorderClass(errors, 'name')}
         />
-        {getFieldError(errors, 'name', 'register') && (
+        {getFieldError(errors, 'name') && (
           <p className="text-red-500 text-sm mt-1">
             {getFieldError(errors, 'name')}
           </p>
@@ -106,7 +106,7 @@ const Form = () => {
             </span>
           </button>
         </div>
-        {getFieldError(errors, 'password', 'register') && (
+        {getFieldError(errors, 'password') && (
           <p className="text-red-500 text-sm mt-1">
             {getFieldError(errors, 'password')}
           </p>
@@ -138,7 +138,7 @@ const Form = () => {
             </span>
           </button>
         </div>
-        {getFieldError(errors, 'confirm_password', 'register') && (
+        {getFieldError(errors, 'confirm_password') && (
           <p className="text-red-500 text-sm mt-1">
             {getFieldError(errors, 'confirm_password')}
           </p>

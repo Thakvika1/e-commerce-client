@@ -35,7 +35,6 @@ const Form = () => {
           user: res.user,
         })
       )
-
       navigate('/')
     } catch (err) {
       if (err?.data) setErrors(err.data)

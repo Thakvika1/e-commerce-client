@@ -57,11 +57,11 @@ const Form = () => {
             handleChange={handleChange}
             type="email"
             autoComplete="email"
-            className={errorBorderClass(errors, 'email')}
+            className={errorBorderClass(errors, 'email', 'login')}
           />
-          {getFieldError(errors, 'email') && (
+          {getFieldError(errors, 'email', 'login') && (
             <p className="text-red-500 text-sm mt-1">
-              {getFieldError(errors, 'email')}
+              {getFieldError(errors, 'email', 'login')}
             </p>
           )}
         </div>
@@ -81,16 +81,16 @@ const Form = () => {
             handleChange={handleChange}
             type={showPassword ? 'text' : 'password'}
             autoComplete="current-password"
-            className={errorBorderClass(errors, 'password')}
+            className={errorBorderClass(errors, 'password', 'login')}
           />
           <VisiblityButton
             toggle={togglePassword}
             showPassword={showPassword}
           />
         </div>
-        {getFieldError(errors, 'password') && (
+        {getFieldError(errors, 'password', 'login') && (
           <p className="text-red-500 text-sm mt-1">
-            {getFieldError(errors, 'password')}
+            {getFieldError(errors, 'password', 'login')}
           </p>
         )}
       </label>

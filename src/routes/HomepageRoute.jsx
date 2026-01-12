@@ -1,7 +1,6 @@
 import React from 'react'
 import HomepageLayout from '../layouts/HomepageLayout'
 import { Route, Routes } from 'react-router-dom'
-import Register from '../pages/authentication/Register'
 import CreateProduct from '../pages/admin/CreateProduct'
 import ProtectedRoute from './ProtctedRoute'
 import ProductDetail from '../pages/ProductDetail'
@@ -13,6 +12,7 @@ import Login from '../pages/authentication/login'
 import { HOME } from '../config/routes'
 import { LOGIN } from '../config/routes'
 import { REGISTER } from '../config/routes'
+import Register from '../pages/authentication/register'
 
 const HomepageRoute = () => {
   // route that already login can't access

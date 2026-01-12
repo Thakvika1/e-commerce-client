@@ -19,6 +19,7 @@ export const useForm = (initialValues, rules) => {
       [name]: null,
     }))
   }
+  
 
   const handleSubmit = (onSubmit) => (e) => {
     e.preventDefault()

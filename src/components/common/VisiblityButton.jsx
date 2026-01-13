@@ -1,11 +1,16 @@
 import React from 'react'
+import { useState } from 'react'
 
-const VisiblityButton = ({ toggle, showPassword = false }) => {
+const VisiblityButton = ({ showPassword, setShowPassword }) => {
+  const handleClick = () => {
+    setShowPassword(!showPassword)
+  }
+
   return (
     <>
       <button
         type="button"
-        onClick={toggle}
+        onClick={handleClick}
         className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-primary transition-colors flex items-center"
       >
         <span className="material-symbols-outlined text-[22px]">

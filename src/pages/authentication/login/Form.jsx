@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { useLoginUserMutation } from '../../../services/authApi'
@@ -22,7 +22,6 @@ const Form = () => {
 
   // Toggle password visibility
   const [showPassword, setShowPassword] = useState(false)
-  const togglePassword = () => setShowPassword(!showPassword)
 
   // Submit function receives actual formData
   const login = async (data) => {
@@ -83,8 +82,8 @@ const Form = () => {
             className={errorBorderClass(errors, 'password', 'login')}
           />
           <VisiblityButton
-            toggle={togglePassword}
             showPassword={showPassword}
+            setShowPassword={setShowPassword}
           />
         </div>
         {getFieldError(errors, 'password', 'login') && (

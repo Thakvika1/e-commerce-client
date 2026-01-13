@@ -6,6 +6,7 @@ import { useForm } from '../../../hooks/useForm'
 import { VALIDATION_RULES } from '../../../config/validateRules'
 import { getFieldError } from '../../../utils/formErrors'
 import { errorBorderClass } from '../../../utils/formErrors'
+import VisiblityButton from '../../../components/common/VisiblityButton'
 
 const Form = () => {
   const { formData, errors, setErrors, handleChange, handleSubmit } = useForm(
@@ -22,10 +23,7 @@ const Form = () => {
   const register = async (data) => {
     try {
       await registerUser(data).unwrap()
-      // setErrors(null)
       navigate('/login')
-
-      // console.log(res)
     } catch (err) {
       console.log(err)
 
@@ -36,6 +34,7 @@ const Form = () => {
     }
   }
 
+  // toggle show password
   const [showPassword, setShowPassword] = useState(false)
   const [showConfirmPassword, setShowConfirmPassword] = useState(false)
 
@@ -95,16 +94,10 @@ const Form = () => {
             type={showPassword ? 'text' : 'password'}
             className={errorBorderClass(errors, 'password')}
           />
-          <button
-            type="button"
-            onClick={() => setShowPassword(!showPassword)}
-            className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-primary transition-colors"
-            aria-label="Toggle password visibility"
-          >
-            <span className="material-symbols-outlined text-[22px]">
-              {showPassword ? 'visibility' : 'visibility_off'}
-            </span>
-          </button>
+          <VisiblityButton
+            showPassword={showPassword}
+            setShowPassword={setShowPassword}
+          />
         </div>
         {getFieldError(errors, 'password') && (
           <p className="text-red-500 text-sm mt-1">
@@ -127,16 +120,10 @@ const Form = () => {
             type={showConfirmPassword ? 'text' : 'password'}
             className={errorBorderClass(errors, 'confirm_password')}
           />
-          <button
-            type="button"
-            onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-            className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-primary transition-colors"
-            aria-label="Toggle confirm password visibility"
-          >
-            <span className="material-symbols-outlined text-[22px]">
-              {showConfirmPassword ? 'visibility' : 'visibility_off'}
-            </span>
-          </button>
+          <VisiblityButton
+            showPassword={showConfirmPassword}
+            setShowPassword={setShowConfirmPassword}
+          />
         </div>
         {getFieldError(errors, 'confirm_password') && (
           <p className="text-red-500 text-sm mt-1">

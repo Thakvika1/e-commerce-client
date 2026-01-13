@@ -1,9 +1,11 @@
-import React from 'react'
 import ProductCard from '../../components/cards/ProductCard'
 import ProductCardSkeleton from '../../components/cards/ProductCardSkeleton'
 import { useGetProductsQuery } from '../../services/productApi'
+import { useCart } from '../../hooks/useCart'
 
 const ProductContent = () => {
+  const { addToCart } = useCart()
+
   const { data, error, isLoading } = useGetProductsQuery()
 
   if (error) return <p>Something went wrong</p>
@@ -20,12 +22,9 @@ const ProductContent = () => {
           ))
         : data.data.data.map((product) => (
             <ProductCard
-              // productImage={starbuck}
-              // productDesciption={product.category.name}
               key={product.id}
-              productName={product.name}
-              productPrice={product.price}
-              productId={product.id}
+              product={product}
+              addProduct={addToCart}
             />
           ))}
     </div>

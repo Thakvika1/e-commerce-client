@@ -1,6 +1,6 @@
 import React from 'react'
 
-const OrderSummary = () => {
+const OrderSummary = ({ total }) => {
   return (
     <>
       <div className="lg:col-span-4 relative">
@@ -15,7 +15,7 @@ const OrderSummary = () => {
               <div className="flex justify-between text-slate-600 dark:text-slate-400">
                 <span>Subtotal</span>
                 <span className="font-medium text-slate-900 dark:text-white">
-                  $493.50
+                  ${total}
                 </span>
               </div>
               <div className="flex justify-between text-slate-600 dark:text-slate-400">
@@ -39,7 +39,7 @@ const OrderSummary = () => {
                 Order Total
               </span>
               <span className="text-2xl font-black text-slate-900 dark:text-white">
-                $532.98
+                ${total}
               </span>
             </div>
             {/* <!-- Checkout Button --> */}

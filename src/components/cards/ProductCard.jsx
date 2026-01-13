@@ -1,16 +1,16 @@
 import React from 'react'
 import Button from '../common/Button'
+import { Link } from 'react-router-dom'
 
 const ProductCard = ({
   productImage,
   productName,
   productPrice,
-  // productQty,
-  productDesciption,
+  productId,
 }) => {
   return (
     <>
-      <div className="group cursor-pointer bg-white dark:bg-slate-800 rounded-xl overflow-hidden border border-gray-100 shadow-sm dark:border-slate-700 hover:shadow-2xl hover:shadow-slate-200/50 dark:hover:shadow-slate-900/50 hover:-translate-y-2 transition-all duration-300 flex flex-col h-full">
+      <div className="group bg-white dark:bg-slate-800 rounded-xl overflow-hidden border border-gray-100 shadow-sm dark:border-slate-700 hover:shadow-2xl hover:shadow-slate-200/50 dark:hover:shadow-slate-900/50 hover:-translate-y-2 transition-all duration-300 flex flex-col h-full">
         <div className="relative overflow-hidden aspect-[4/3]">
           <div
             className="w-full h-full bg-cover bg-center group-hover:scale-110 transition-transform duration-500"
@@ -29,14 +29,13 @@ const ProductCard = ({
             </h3>
           </div>
           <p className="text-slate-500 dark:text-slate-400 text-sm mb-4 line-clamp-2">
-            {productDesciption ??
-              ' High fidelity audio with active noise cancellation and 20h battery life.'}
+            ${productPrice ?? 199.99}
           </p>
           <div className="mt-auto flex items-center justify-between">
             <span className="text-xl font-black text-slate-900 dark:text-white">
-              ${productPrice ?? 199.99}
+              <Link to={`product/${productId}`}>Detail</Link>
             </span>
-            <Button>Add To Cart</Button>
+            <Button icon="true">Add To Cart</Button>
           </div>
         </div>
       </div>

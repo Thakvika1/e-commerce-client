@@ -22,7 +22,17 @@ export const productApi = createApi({
       }),
       invalidatesTags: ['Product'],
     }),
+
+    // get product by id
+    getProductById: builder.query({
+      query: (id) => `product/${id}`,
+      providesTags: (result, error, id) => [{ type: 'Product', id }],
+    }),
   }),
 })
 
-export const { useGetProductsQuery, useCreateProductMutation } = productApi
+export const {
+  useGetProductsQuery,
+  useCreateProductMutation,
+  useGetProductByIdQuery,
+} = productApi

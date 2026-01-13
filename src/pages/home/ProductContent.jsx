@@ -9,7 +9,7 @@ const ProductContent = () => {
   if (error) return <p>Something went wrong</p>
   // if (isLoading) return <p>Loading...</p>
 
-  const lenthData = data?.data?.data.length || 6
+  const lenthData = data?.data?.data.length ?? 6
 
   // console.log(data)
   return (
@@ -20,11 +20,12 @@ const ProductContent = () => {
           ))
         : data.data.data.map((product) => (
             <ProductCard
-              key={product.id}
               // productImage={starbuck}
-              productDesciption={product.category.name}
+              // productDesciption={product.category.name}
+              key={product.id}
               productName={product.name}
               productPrice={product.price}
+              productId={product.id}
             />
           ))}
     </div>

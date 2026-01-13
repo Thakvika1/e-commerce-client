@@ -3,7 +3,6 @@ import HomepageLayout from '../layouts/HomepageLayout'
 import { Route, Routes } from 'react-router-dom'
 import CreateProduct from '../pages/admin/CreateProduct'
 import ProtectedRoute from './ProtctedRoute'
-import ProductDetail from '../pages/ProductDetail'
 import PublicRoute from './PublicRoute'
 import UserDetail from '../pages/UserDetail'
 import AdminRoute from './AdminRoute'
@@ -13,6 +12,7 @@ import { HOME } from '../config/routes'
 import { LOGIN } from '../config/routes'
 import { REGISTER } from '../config/routes'
 import Register from '../pages/authentication/register'
+import ProductDetail from '../pages/ProductDetail'
 
 const HomepageRoute = () => {
   // route that already login can't access
@@ -29,6 +29,7 @@ const HomepageRoute = () => {
       <Route element={<HomepageLayout />}>
         {/* everyone can access  */}
         <Route path={HOME} element={<Home />} />
+        <Route path="/product/:id" element={<ProductDetail />} />
 
         {/* Admin protected route */}
         <Route

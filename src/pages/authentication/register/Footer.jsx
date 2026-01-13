@@ -1,4 +1,4 @@
-import React from 'react'
+import { LOGIN } from '../../../config/routes'
 
 const Footer = () => {
   return (
@@ -6,7 +6,7 @@ const Footer = () => {
       <p className="text-center text-slate-600 dark:text-slate-400 text-sm">
         Already have an account?{' '}
         <a
-          href="/login"
+          href={LOGIN}
           className="text-primary font-black hover:underline ml-1"
         >
           Login

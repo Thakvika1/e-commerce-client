@@ -1,4 +1,4 @@
-import React from 'react'
+import { REGISTER } from '../../../config/routes'
 
 const Footer = () => {
   return (
@@ -8,7 +8,7 @@ const Footer = () => {
       </p>
       <a
         className="text-primary font-bold text-sm hover:underline"
-        href="/register"
+        href={REGISTER}
       >
         Register
       </a>

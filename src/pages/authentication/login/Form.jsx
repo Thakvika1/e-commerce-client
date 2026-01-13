@@ -20,9 +20,6 @@ const Form = () => {
   const dispatch = useDispatch()
   const [loginUser, { isLoading }] = useLoginUserMutation()
 
-  // Toggle password visibility
-  const [showPassword, setShowPassword] = useState(false)
-
   // Submit function receives actual formData
   const login = async (data) => {
     try {
@@ -40,6 +37,9 @@ const Form = () => {
       console.log('error : ', err)
     }
   }
+
+  // Toggle password visibility
+  const [showPassword, setShowPassword] = useState(false)
 
   return (
     <form className="flex flex-col gap-5 mt-2" onSubmit={handleSubmit(login)}>

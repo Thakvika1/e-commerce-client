@@ -73,7 +73,7 @@ const Form = () => {
           type={'email'}
           className={errorBorderClass(errors, 'email')}
         />
-        {getFieldError(errors, 'email', 'register') && (
+        {getFieldError(errors, 'email') && (
           <p className="text-red-500 text-sm mt-1">
             {getFieldError(errors, 'email')}
           </p>

@@ -8,11 +8,10 @@ import UserDetail from '../pages/UserDetail'
 import AdminRoute from './AdminRoute'
 import Home from '../pages/home'
 import Login from '../pages/authentication/login'
-import { HOME } from '../config/routes'
-import { LOGIN } from '../config/routes'
-import { REGISTER } from '../config/routes'
+import { HOME, CART, LOGIN, REGISTER } from '../config/routes'
 import Register from '../pages/authentication/register'
 import ProductDetail from '../pages/ProductDetail'
+import Cart from '../pages/user/cart'
 
 const HomepageRoute = () => {
   // route that already login can't access
@@ -30,6 +29,7 @@ const HomepageRoute = () => {
         {/* everyone can access  */}
         <Route path={HOME} element={<Home />} />
         <Route path="/product/:id" element={<ProductDetail />} />
+        <Route path={CART} element={<Cart />} />
 
         {/* Admin protected route */}
         <Route

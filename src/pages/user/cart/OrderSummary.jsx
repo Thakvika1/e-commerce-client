@@ -1,6 +1,6 @@
-import React from 'react'
+import { useCart } from '../../../hooks/useCart'
 
-const OrderSummary = ({ total }) => {
+const OrderSummary = ({total}) => {
   return (
     <>
       <div className="lg:col-span-4 relative">
@@ -27,7 +27,7 @@ const OrderSummary = ({ total }) => {
               <div className="flex justify-between text-slate-600 dark:text-slate-400">
                 <span>Tax estimate</span>
                 <span className="font-medium text-slate-900 dark:text-white">
-                  $39.48
+                  Free
                 </span>
               </div>
             </div>

@@ -4,6 +4,8 @@ import BlueDot from '../common/BlueDot'
 import MaterialLogo from '../common/MaterialLogo'
 import ButtonDarkMode from '../common/ButtonDarkMode'
 import { useSelector } from 'react-redux'
+import { CART } from '../../config/routes'
+import { Link } from 'react-router-dom'
 
 const HomeNavbar = ({ items = [], username }) => {
   const [showMenu, setShowMenu] = useState(false)
@@ -43,8 +45,11 @@ const HomeNavbar = ({ items = [], username }) => {
                 })}
               </div>
               <button className="relative p-2 text-slate-700 dark:text-slate-200 hover:bg-slate-200 dark:hover:bg-slate-800 rounded-lg transition-colors group cursor-pointer">
-                <MaterialLogo>shopping_cart</MaterialLogo>
-                <BlueDot />
+                <Link to={CART}>
+                  <MaterialLogo>shopping_cart</MaterialLogo>
+
+                  <BlueDot />
+                </Link>
               </button>
 
               {/* <!-- Mobile Menu Icon --> */}

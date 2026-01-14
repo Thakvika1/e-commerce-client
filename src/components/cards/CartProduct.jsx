@@ -17,19 +17,17 @@ const CartProduct = ({ item, removeFromCart, updateQuantity }) => {
           <div className="flex justify-between items-start gap-4">
             <div>
               <h3 className="text-lg font-bold text-slate-900 dark:text-white leading-tight">
-                Premium Wireless Headphones
-                {item.name}
+                {item?.name}
               </h3>
-              {/* <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">
+              <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">
                 Color: Matte Black | Warranty: 2 Years
               </p>
               <div className="mt-2 inline-flex items-center px-2 py-1 rounded bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 text-xs font-medium">
                 In Stock
-              </div> */}
+              </div>
             </div>
             <p className="text-lg font-bold text-slate-900 dark:text-white">
-              $299.00
-              {item.price}
+              ${item?.price}
             </p>
           </div>
           <div className="flex justify-between items-end mt-4 sm:mt-0">
@@ -51,7 +49,7 @@ const CartProduct = ({ item, removeFromCart, updateQuantity }) => {
                   }
                   type="number"
                   min={1}
-                  value={item.quantity}
+                  value={item?.quantity}
                 />
                 <button
                   aria-label="Increase quantity"

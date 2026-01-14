@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 
 export const useCart = () => {
   const [cart, setCart] = useState(() => {
@@ -16,11 +16,11 @@ export const useCart = () => {
       const exist = oldCart.find((itemOld) => itemOld.id === item.id)
 
       if (exist) {
-        return oldCart.map((itemOld) => {
+        return oldCart.map((itemOld) =>
           itemOld.id === item.id
             ? { ...itemOld, quantity: itemOld.quantity + 1 }
             : itemOld
-        })
+        )
       }
       return [...oldCart, { ...item, quantity: 1 }]
     })
@@ -41,8 +41,10 @@ export const useCart = () => {
   // clear all product from cart
   const clearCart = () => setCart([])
 
-  // caculate total price
-  const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0)
+  // calculate total price
+  const total = useMemo(() => {
+    return cart.reduce((sum, item) => sum + item.price * item.quantity, 0)
+  }, [cart])
 
   return { cart, addToCart, removeFromCart, updateQuantity, clearCart, total }
 }

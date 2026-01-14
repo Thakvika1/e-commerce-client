@@ -18,10 +18,8 @@ const Cart = () => {
                   item={item}
                   removeFromCart={removeFromCart}
                   updateQuantity={updateQuantity}
-                />
+                />  
               ))}
-              <CartProduct />
-              <CartProduct />
             </div>
           </div>
           <OrderSummary total={total} />

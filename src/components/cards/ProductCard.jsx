@@ -30,11 +30,11 @@ const ProductCard = ({ product, addProduct }) => {
             <span className="text-xl font-black text-slate-900 dark:text-white">
               <Link to={`product/${product.id}`}>Detail</Link>
             </span>
-            <Button icon="true">Add To Cart</Button>
             <button
               onClick={() => addProduct(product)}
-              className="bg-primary hover:bg-blue-600 text-white px-4 py-2 rounded-lg font-medium text-sm transition-all shadow-md shadow-primary/20 flex items-center gap-2 group/btn "
+              className="bg-primary cursor-pointer hover:bg-blue-600 text-white px-4 py-2 rounded-lg font-medium text-sm transition-all shadow-md shadow-primary/20 flex items-center gap-2 group/btn "
             >
+              Add To Cart
               <MaterialLogo>add_shopping_cart</MaterialLogo>
             </button>
           </div>

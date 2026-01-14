@@ -1,12 +1,13 @@
-import Button from '../common/Button'
 import { Link } from 'react-router-dom'
 import MaterialLogo from '../common/MaterialLogo'
 
 const ProductCard = ({ product, addProduct }) => {
+
+
   return (
     <>
       <div className="group bg-white dark:bg-slate-800 rounded-xl overflow-hidden border border-gray-100 shadow-sm dark:border-slate-700 hover:shadow-2xl hover:shadow-slate-200/50 dark:hover:shadow-slate-900/50 hover:-translate-y-2 transition-all duration-300 flex flex-col h-full">
-        <div className="relative overflow-hidden aspect-[4/3]">
+        <div className="relative overflow-hidden aspect-4/3">
           <div
             className="w-full h-full bg-cover bg-center group-hover:scale-110 transition-transform duration-500"
             style={{
@@ -17,7 +18,7 @@ const ProductCard = ({ product, addProduct }) => {
             }}
           ></div>
         </div>
-        <div className="p-5 flex flex-col flex-grow">
+        <div className="p-5 flex flex-col grow">
           <div className="flex justify-between items-start mb-2">
             <h3 className="text-lg font-bold text-slate-900 dark:text-white line-clamp-1">
               {product.name ?? 'Wireless Headphones'}

@@ -1,6 +1,12 @@
 import React from 'react'
 
-const CartProduct = ({ item, removeFromCart, updateQuantity }) => {
+const CartProduct = ({
+  item,
+  removeFromCart,
+  updateQuantity,
+  decreaseQuantity,
+  increaseQuantity,
+}) => {
   return (
     <>
       <div className="p-6 flex flex-col sm:flex-row gap-6 group hover:bg-slate-200 dark:hover:bg-slate-800/50 transition-colors">
@@ -35,6 +41,7 @@ const CartProduct = ({ item, removeFromCart, updateQuantity }) => {
               {/* <!-- Quantity Stepper --> */}
               <div className="flex items-center rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 h-9">
                 <button
+                  onClick={() => decreaseQuantity(item)}
                   aria-label="Decrease quantity"
                   className="w-9 h-full flex items-center justify-center text-slate-500 hover:text-primary hover:bg-slate-50 dark:hover:bg-slate-800 rounded-l-lg transition-colors"
                 >
@@ -47,11 +54,13 @@ const CartProduct = ({ item, removeFromCart, updateQuantity }) => {
                   onChange={(e) =>
                     updateQuantity(item.id, parseInt(e.target.value) || 1)
                   }
-                  type="number"
+                  // type="number"
+                  readOnly={true}
                   min={1}
                   value={item?.quantity}
                 />
                 <button
+                  onClick={() => increaseQuantity(item)}
                   aria-label="Increase quantity"
                   className="w-9 h-full flex items-center justify-center text-slate-500 hover:text-primary hover:bg-slate-50 dark:hover:bg-slate-800 rounded-r-lg transition-colors"
                 >

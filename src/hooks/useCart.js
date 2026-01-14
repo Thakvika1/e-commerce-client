@@ -38,6 +38,28 @@ export const useCart = () => {
     )
   }
 
+  // decrease quantity
+  const decreaseQuantity = (item) => {
+    setCart((oldCart) =>
+      oldCart.map((itemOld) =>
+        itemOld.id === item.id && item.quantity > 1
+          ? { ...itemOld, quantity: itemOld.quantity - 1 }
+          : itemOld
+      )
+    )
+  }
+
+  // increase quantity
+  const increaseQuantity = (item) => {
+    setCart((oldCart) =>
+      oldCart.map((itemOld) =>
+        itemOld.id === item.id && itemOld.quantity < item.stock
+          ? { ...itemOld, quantity: itemOld.quantity + 1 }
+          : itemOld
+      )
+    )
+  }
+
   // clear all product from cart
   const clearCart = () => setCart([])
 
@@ -46,5 +68,14 @@ export const useCart = () => {
     return cart.reduce((sum, item) => sum + item.price * item.quantity, 0)
   }, [cart])
 
-  return { cart, addToCart, removeFromCart, updateQuantity, clearCart, total }
+  return {
+    cart,
+    addToCart,
+    removeFromCart,
+    updateQuantity,
+    decreaseQuantity,
+    increaseQuantity,
+    clearCart,
+    total,
+  }
 }

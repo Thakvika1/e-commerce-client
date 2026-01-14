@@ -11,7 +11,7 @@ import { useForm } from '../../../hooks/useForm'
 
 const Form = () => {
   // Controlled form hook
-  const { formData, errors, setErrors, handleChange, handleSubmit } = useForm(
+  const { errors, setErrors, handleChange, handleSubmit } = useForm(
     { email: '', password: '' },
     VALIDATION_RULES.login
   )

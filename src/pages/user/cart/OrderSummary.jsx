@@ -1,6 +1,4 @@
-import { useCart } from '../../../hooks/useCart'
-
-const OrderSummary = ({total}) => {
+const OrderSummary = ({ total }) => {
   return (
     <>
       <div className="lg:col-span-4 relative">

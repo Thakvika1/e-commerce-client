@@ -1,4 +1,6 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
+import { HOME } from '../../../config/routes'
 
 const EmptyCart = () => {
   return (
@@ -20,7 +22,7 @@ const EmptyCart = () => {
             Looks like you haven't added anything to your cart yet.
           </p>
           <button className="bg-primary hover:bg-primary-dark text-white font-bold py-2.5 px-6 rounded-lg transition-colors">
-            Start Shopping
+            <Link to={HOME}>Start Shopping</Link>
           </button>
         </div>
       </div>

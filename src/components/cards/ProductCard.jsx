@@ -2,9 +2,22 @@ import { Link } from 'react-router-dom'
 import MaterialLogo from '../common/MaterialLogo'
 import { addToCart } from '../../features/cartSlice'
 import { useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
+import toast from 'react-hot-toast'
 
 const ProductCard = ({ product }) => {
+  const auth = useSelector((state) => state.auth.isAuthenticated)
   const dispatch = useDispatch()
+
+  const handleAddToCart = () => {
+    if (!auth) {
+      toast.dismiss()
+      toast.error('You need to Login First !!!')
+      return
+    }
+
+    dispatch(addToCart(product))
+  }
 
   return (
     <>
@@ -35,7 +48,7 @@ const ProductCard = ({ product }) => {
             </span>
             <button
               // onClick={() => addProduct(product)}
-              onClick={() => dispatch(addToCart(product))}
+              onClick={handleAddToCart}
               className="bg-primary cursor-pointer hover:bg-blue-600 text-white px-4 py-2 rounded-lg font-medium text-sm transition-all shadow-md shadow-primary/20 flex items-center gap-2 group/btn "
             >
               Add To Cart

@@ -1,4 +1,3 @@
-import React from 'react'
 import HomepageLayout from '../layouts/HomepageLayout'
 import { Route, Routes } from 'react-router-dom'
 import CreateProduct from '../pages/admin/CreateProduct'

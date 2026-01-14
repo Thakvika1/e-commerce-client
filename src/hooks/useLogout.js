@@ -13,7 +13,7 @@ const useLogout = () => {
       dispactch(clearAuth())
       dispactch(authApi.util.resetApiState())
     } catch (err) {
-      console.log('Logout API failed')
+      console.log('Error :', err)
     }
   }
 

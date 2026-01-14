@@ -49,8 +49,6 @@ const HomeNavbar = ({ items = [], username, blueDot }) => {
               <button className="relative p-2 text-slate-700 dark:text-slate-200 hover:bg-slate-200 dark:hover:bg-slate-800 rounded-lg transition-colors group cursor-pointer">
                 <Link to={CART}>
                   <MaterialLogo>shopping_cart</MaterialLogo>
-                  {/* {cart.length > 0 ? <BlueDot /> : null} */}
-                  {/* <BlueDot /> */}
                   {blueDot && <BlueDot />}
                 </Link>
               </button>

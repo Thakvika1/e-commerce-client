@@ -1,18 +1,12 @@
 import React from 'react'
 import CartProduct from '../../../components/cards/CartProduct'
 import OrderSummary from './OrderSummary'
-import { useCart } from '../../../hooks/useCart'
+import { useSelector } from 'react-redux'
 
 const Cart = () => {
-  const {
-    cart,
-    removeFromCart,
-    updateQuantity,
-    // clearCart,
-    total,
-    decreaseQuantity,
-    increaseQuantity,
-  } = useCart()
+  const cart = useSelector((state) => state.cart.items)
+
+  const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0)
 
   return (
     <>
@@ -21,14 +15,7 @@ const Cart = () => {
           <div className="lg:col-span-8 flex flex-col gap-6">
             <div className=" rounded-xl shadow-sm border border-slate-100 dark:border-slate-800 divide-y divide-slate-100 dark:divide-slate-800 overflow-hidden">
               {cart.map((item) => (
-                <CartProduct
-                  key={item.id}
-                  item={item}
-                  removeFromCart={removeFromCart}
-                  updateQuantity={updateQuantity}
-                  decreaseQuantity={decreaseQuantity}
-                  increaseQuantity={increaseQuantity}
-                />
+                <CartProduct key={item.id} item={item} />
               ))}
             </div>
           </div>

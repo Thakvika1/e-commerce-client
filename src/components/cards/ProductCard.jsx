@@ -1,8 +1,10 @@
 import { Link } from 'react-router-dom'
 import MaterialLogo from '../common/MaterialLogo'
+import { addToCart } from '../../features/cartSlice'
+import { useDispatch } from 'react-redux'
 
-const ProductCard = ({ product, addProduct }) => {
-
+const ProductCard = ({ product }) => {
+  const dispatch = useDispatch()
 
   return (
     <>
@@ -32,7 +34,8 @@ const ProductCard = ({ product, addProduct }) => {
               <Link to={`product/${product.id}`}>Detail</Link>
             </span>
             <button
-              onClick={() => addProduct(product)}
+              // onClick={() => addProduct(product)}
+              onClick={() => dispatch(addToCart(product))}
               className="bg-primary cursor-pointer hover:bg-blue-600 text-white px-4 py-2 rounded-lg font-medium text-sm transition-all shadow-md shadow-primary/20 flex items-center gap-2 group/btn "
             >
               Add To Cart

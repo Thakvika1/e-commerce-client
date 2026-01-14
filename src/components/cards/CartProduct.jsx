@@ -1,12 +1,13 @@
-import React from 'react'
-
-const CartProduct = ({
-  item,
-  removeFromCart,
-  updateQuantity,
-  decreaseQuantity,
+import { useDispatch } from 'react-redux'
+import {
   increaseQuantity,
-}) => {
+  decreaseQuantity,
+  removeFromCart,
+} from '../../features/cartSlice'
+
+const CartProduct = ({ item }) => {
+  const dispatch = useDispatch()
+
   return (
     <>
       <div className="p-6 flex flex-col sm:flex-row gap-6 group hover:bg-slate-200 dark:hover:bg-slate-800/50 transition-colors">
@@ -41,7 +42,8 @@ const CartProduct = ({
               {/* <!-- Quantity Stepper --> */}
               <div className="flex items-center rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 h-9">
                 <button
-                  onClick={() => decreaseQuantity(item)}
+                  // onClick={() => decreaseQuantity(item)}
+                  onClick={() => dispatch(decreaseQuantity(item))}
                   aria-label="Decrease quantity"
                   className="w-9 h-full flex items-center justify-center text-slate-500 hover:text-primary hover:bg-slate-50 dark:hover:bg-slate-800 rounded-l-lg transition-colors"
                 >
@@ -51,16 +53,17 @@ const CartProduct = ({
                 </button>
                 <input
                   className="w-12 h-full text-center border-none bg-transparent text-sm font-semibold text-slate-900 dark:text-white focus:ring-0 p-0"
-                  onChange={(e) =>
-                    updateQuantity(item.id, parseInt(e.target.value) || 1)
-                  }
+                  // onChange={(e) =>
+                  //   updateQuantity(item.id, parseInt(e.target.value) || 1)
+                  // }
                   // type="number"
                   readOnly={true}
                   min={1}
                   value={item?.quantity}
                 />
                 <button
-                  onClick={() => increaseQuantity(item)}
+                  // onClick={() => increaseQuantity(item)}
+                  onClick={() => dispatch(increaseQuantity(item))}
                   aria-label="Increase quantity"
                   className="w-9 h-full flex items-center justify-center text-slate-500 hover:text-primary hover:bg-slate-50 dark:hover:bg-slate-800 rounded-r-lg transition-colors"
                 >
@@ -71,7 +74,8 @@ const CartProduct = ({
               </div>
               {/* <!-- Remove Button --> */}
               <button
-                onClick={() => removeFromCart(item.id)}
+                // onClick={() => removeFromCart(item.id)}
+                onClick={() => dispatch(removeFromCart(item.id))}
                 className="text-sm font-medium text-slate-400 hover:text-red-500 dark:hover:text-red-400 transition-colors flex items-center gap-1 group/remove"
               >
                 <span className="material-symbols-outlined text-[18px] group-hover/remove:fill-current">

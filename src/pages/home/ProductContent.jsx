@@ -1,10 +1,14 @@
 import ProductCard from '../../components/cards/ProductCard'
 import ProductCardSkeleton from '../../components/cards/ProductCardSkeleton'
 import { useGetProductsQuery } from '../../services/productApi'
-import { useCart } from '../../hooks/useCart'
+// import { useCart } from '../../hooks/useCart'
+// import { useSelector } from 'react-redux'
+// import { useDispatch } from 'react-redux'
+// import { addToCart } from '../../features/cartSlice'
 
 const ProductContent = () => {
-  const { addToCart } = useCart()
+
+  // const { addToCart } = useCart()
 
   const { data, error, isLoading } = useGetProductsQuery()
 
@@ -24,7 +28,7 @@ const ProductContent = () => {
             <ProductCard
               key={product.id}
               product={product}
-              addProduct={addToCart}
+              // addProduct={addToCart}
             />
           ))}
     </div>

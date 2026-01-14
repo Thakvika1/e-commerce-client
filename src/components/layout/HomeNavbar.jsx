@@ -6,9 +6,8 @@ import ButtonDarkMode from '../common/ButtonDarkMode'
 import { useSelector } from 'react-redux'
 import { CART } from '../../config/routes'
 import { Link } from 'react-router-dom'
-// import { useCart } from '../../hooks/useCart'
 
-const HomeNavbar = ({ items = [], username }) => {
+const HomeNavbar = ({ items = [], username, blueDot }) => {
   const [showMenu, setShowMenu] = useState(false)
 
   // const { cart } = useCart()
@@ -51,7 +50,8 @@ const HomeNavbar = ({ items = [], username }) => {
                 <Link to={CART}>
                   <MaterialLogo>shopping_cart</MaterialLogo>
                   {/* {cart.length > 0 ? <BlueDot /> : null} */}
-                  <BlueDot />
+                  {/* <BlueDot /> */}
+                  {blueDot && <BlueDot />}
                 </Link>
               </button>
 

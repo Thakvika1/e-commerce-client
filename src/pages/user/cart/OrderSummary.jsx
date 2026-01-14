@@ -1,4 +1,9 @@
-const OrderSummary = ({ total }) => {
+import { useSelector } from 'react-redux'
+
+const OrderSummary = () => {
+  const cart = useSelector((state) => state.cart.items)
+
+  const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0)
   return (
     <>
       <div className="lg:col-span-4 relative">

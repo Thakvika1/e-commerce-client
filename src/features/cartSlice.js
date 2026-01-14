@@ -14,17 +14,27 @@ const cartSlice = createSlice({
       const item = action.payload
       const exist = state.items.find((i) => i.id === item.id)
 
-      if (exist) {
-        if (exist.quantity >= item.stock) {
-          toast.dismiss()
-          toast.error('Item out of stock ❌')
-          return
-        }
+      // stock check
+      if (exist && exist.quantity >= item.stock) {
+        toast.dismiss()
+        toast.error('Item out of stock ❌')
+        return
+      }
 
+      // existing item -> increase quantity
+      if (exist) {
         exist.quantity += 1
         toast.dismiss()
         toast.success('Added to cart 🛒')
-      } else {
+      }
+      // limit NEW items only
+      else if (state.items.length >= 10) {
+        toast.dismiss()
+        toast.error('You can only add 10 items to Cart !!')
+        return
+      }
+      // new item
+      else {
         state.items.push({ ...item, quantity: 1 })
         toast.dismiss()
         toast.success('Added to cart 🛒')

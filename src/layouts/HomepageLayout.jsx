@@ -4,6 +4,7 @@ import Footer from '../components/layout/Footer'
 import { Outlet } from 'react-router-dom'
 import { navbarData } from '../data/navbarData'
 import useAuthUser from '../hooks/useAuthUser'
+import { Toaster } from 'react-hot-toast'
 
 const HomepageLayout = () => {
   const { user, isLoading } = useAuthUser()
@@ -13,6 +14,7 @@ const HomepageLayout = () => {
   return (
     <>
       <HomeNavbar items={navbarData} username={user?.name} />
+      <Toaster position="top-center" />
       <Outlet />
       <Footer />
     </>

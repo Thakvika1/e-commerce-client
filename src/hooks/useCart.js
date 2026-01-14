@@ -1,4 +1,5 @@
 import { useState, useEffect, useMemo } from 'react'
+import toast from 'react-hot-toast'
 
 export const useCart = () => {
   const [cart, setCart] = useState(() => {
@@ -13,15 +14,29 @@ export const useCart = () => {
   // add product to cart
   const addToCart = (item) => {
     setCart((oldCart) => {
-      const exist = oldCart.find((itemOld) => itemOld.id === item.id)
+      const exist = oldCart.find((oldItem) => oldItem.id === item.id)
 
+      //  stock check
+      if (exist && exist.quantity >= item.stock) {
+        toast.dismiss()
+        toast.error('Item out of stock ❌')
+        return oldCart 
+      }
+
+      // item exists
       if (exist) {
+        toast.dismiss()
+        toast.success('Added to cart 🛒')
         return oldCart.map((itemOld) =>
           itemOld.id === item.id
             ? { ...itemOld, quantity: itemOld.quantity + 1 }
             : itemOld
         )
       }
+
+      // new item
+      toast.dismiss()
+      toast.success('Added to cart 🛒')
       return [...oldCart, { ...item, quantity: 1 }]
     })
   }
@@ -29,6 +44,7 @@ export const useCart = () => {
   // remove product from cart
   const removeFromCart = (id) => {
     setCart((oldCart) => oldCart.filter((item) => item.id !== id))
+    toast('Item removed ❌')
   }
 
   // update product quantity
@@ -51,9 +67,15 @@ export const useCart = () => {
 
   // increase quantity
   const increaseQuantity = (item) => {
+    if (item.quantity >= item.stock) {
+      toast.dismiss()
+      toast.error('Item out of stock ❌')
+      return
+    }
+
     setCart((oldCart) =>
       oldCart.map((itemOld) =>
-        itemOld.id === item.id && itemOld.quantity < item.stock
+        itemOld.id === item.id
           ? { ...itemOld, quantity: itemOld.quantity + 1 }
           : itemOld
       )

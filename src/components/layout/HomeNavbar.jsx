@@ -36,13 +36,20 @@ const HomeNavbar = ({ items = [], username, blueDot }) => {
                 {/* map data  */}
                 {items.map((item, index) => {
                   return (
-                    <a
+                    <Link
                       key={index}
                       className="text-sm font-medium hover:text-primary transition-colors"
-                      href={item.link}
+                      to={item.link}
                     >
                       {item.name}
-                    </a>
+                    </Link>
+                    // <a
+                    //   key={index}
+                    //   className="text-sm font-medium hover:text-primary transition-colors"
+                    //   href={item.link}
+                    // >
+                    //   {item.name}
+                    // </a>
                   )
                 })}
               </div>

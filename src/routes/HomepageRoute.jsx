@@ -11,6 +11,7 @@ import { HOME, CART, LOGIN, REGISTER } from '../config/routes'
 import Register from '../pages/authentication/register'
 import ProductDetail from '../pages/ProductDetail'
 import Cart from '../pages/user/cart'
+import AuthPageLayout from '../layouts/AuthPageLayout'
 
 const HomepageRoute = () => {
   // route that already login can't access
@@ -40,15 +41,6 @@ const HomepageRoute = () => {
           }
         />
 
-        {/* user already logged in cannot access routes */}
-        {publicRoutes.map(({ path, element }) => (
-          <Route
-            key={path}
-            path={path}
-            element={<PublicRoute>{element}</PublicRoute>}
-          />
-        ))}
-
         {/* Only for logged in user*/}
         {authRoute.map(({ path, element }) => (
           <Route
@@ -59,6 +51,16 @@ const HomepageRoute = () => {
         ))}
 
         <Route path="/product-detail" element={<ProductDetail />} />
+      </Route>
+      <Route element={<AuthPageLayout />}>
+        {/* user already logged in cannot access routes */}
+        {publicRoutes.map(({ path, element }) => (
+          <Route
+            key={path}
+            path={path}
+            element={<PublicRoute>{element}</PublicRoute>}
+          />
+        ))}
       </Route>
     </Routes>
   )

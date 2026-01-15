@@ -21,7 +21,6 @@ const Form = () => {
   const dispatch = useDispatch()
   const [loginUser, { isLoading }] = useLoginUserMutation()
 
-
   // Submit function receives actual formData
   const login = async (data) => {
     try {
@@ -36,6 +35,7 @@ const Form = () => {
       toast.success(`Hello ${res.user.name} Welcome to our Shop`)
       navigate('/')
     } catch (err) {
+      toast.error(err.data.message)
       if (err?.data) setErrors(err.data)
       console.log('error : ', err)
     }

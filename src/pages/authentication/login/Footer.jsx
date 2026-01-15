@@ -1,4 +1,5 @@
 import { REGISTER } from '../../../config/routes'
+import { Link } from 'react-router-dom'
 
 const Footer = () => {
   return (
@@ -6,12 +7,12 @@ const Footer = () => {
       <p className="text-slate-500 dark:text-slate-400 text-sm">
         Don't have an account?
       </p>
-      <a
+      <Link
         className="text-primary font-bold text-sm hover:underline"
-        href={REGISTER}
+        to={REGISTER}
       >
         Register
-      </a>
+      </Link>
     </div>
   )
 }

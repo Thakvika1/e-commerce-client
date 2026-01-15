@@ -1,6 +1,4 @@
-import { HOME } from '../config/routes'
-import { LOGIN } from '../config/routes'
-import { REGISTER } from '../config/routes'
+import { HOME, REGISTER, LOGIN } from '../config/routes'
 
 export const navbarData = [
   { name: 'Home', link: HOME },

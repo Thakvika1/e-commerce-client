@@ -74,10 +74,22 @@ const cartSlice = createSlice({
       item.quantity -= 1
       sessionStorage.setItem('cart', JSON.stringify(state.items))
     },
+
+    // clear cart
+    clearCart: (state) => {
+      state.items = []
+      sessionStorage.removeItem('cart')
+      // toast.error('Cart cleared')
+    },
   },
 })
 
-export const { addToCart, removeFromCart, increaseQuantity, decreaseQuantity } =
-  cartSlice.actions
+export const {
+  addToCart,
+  removeFromCart,
+  increaseQuantity,
+  decreaseQuantity,
+  clearCart,
+} = cartSlice.actions
 
 export default cartSlice.reducer

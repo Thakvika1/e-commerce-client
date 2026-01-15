@@ -1,4 +1,3 @@
-import React from 'react'
 import CartProduct from '../../../components/cards/CartProduct'
 import OrderSummary from './OrderSummary'
 import { useSelector } from 'react-redux'

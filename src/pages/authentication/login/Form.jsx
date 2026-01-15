@@ -8,6 +8,7 @@ import VisiblityButton from '../../../components/common/VisiblityButton'
 import { errorBorderClass, getFieldError } from '../../../utils/formErrors'
 import { VALIDATION_RULES } from '../../../config/validateRules'
 import { useForm } from '../../../hooks/useForm'
+import toast from 'react-hot-toast'
 
 const Form = () => {
   // Controlled form hook
@@ -20,6 +21,7 @@ const Form = () => {
   const dispatch = useDispatch()
   const [loginUser, { isLoading }] = useLoginUserMutation()
 
+
   // Submit function receives actual formData
   const login = async (data) => {
     try {
@@ -31,6 +33,7 @@ const Form = () => {
           user: res.user,
         })
       )
+      toast.success(`Hello ${res.user.name} Welcome to our Shop`)
       navigate('/')
     } catch (err) {
       if (err?.data) setErrors(err.data)

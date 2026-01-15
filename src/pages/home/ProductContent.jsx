@@ -1,15 +1,8 @@
 import ProductCard from '../../components/cards/ProductCard'
 import ProductCardSkeleton from '../../components/cards/ProductCardSkeleton'
 import { useGetProductsQuery } from '../../services/productApi'
-// import { useCart } from '../../hooks/useCart'
-// import { useSelector } from 'react-redux'
-// import { useDispatch } from 'react-redux'
-// import { addToCart } from '../../features/cartSlice'
 
 const ProductContent = () => {
-
-  // const { addToCart } = useCart()
-
   const { data, error, isLoading } = useGetProductsQuery()
 
   if (error) return <p>Something went wrong</p>
@@ -25,11 +18,7 @@ const ProductContent = () => {
             <ProductCardSkeleton key={i} />
           ))
         : data.data.data.map((product) => (
-            <ProductCard
-              key={product.id}
-              product={product}
-              // addProduct={addToCart}
-            />
+            <ProductCard key={product.id} product={product} />
           ))}
     </div>
   )

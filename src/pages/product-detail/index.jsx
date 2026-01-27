@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom'
-import { useGetProductByIdQuery } from '../services/productApi'
+import { useGetProductByIdQuery } from '../../services/productApi'
 
 const ProductDetail = () => {
   const { id } = useParams()

@@ -4,7 +4,7 @@ import Form from './Form'
 import SocialButton from './SocialButton'
 import Footer from './Footer'
 
-const index = () => {
+const Register = () => {
   return (
     <main className="flex-grow flex items-center justify-center p-4 sm:p-8 bg-background-light dark:bg-background-dark min-h-screen font-display">
       <div className="w-full max-w-[520px] rounded-xl shadow-xl border border-slate-100 dark:border-slate-800 overflow-hidden transition-all">
@@ -19,4 +19,4 @@ const index = () => {
   )
 }
 
-export default index
+export default Register

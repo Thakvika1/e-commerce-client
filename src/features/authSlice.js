@@ -1,7 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
-  // token: null,
   // Check localStorage on startup to maintain session
   token: localStorage.getItem('token') || null,
   user: null,

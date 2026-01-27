@@ -68,13 +68,13 @@ const HomeNavbar = ({ items = [], username, blueDot }) => {
                 {showMenu && (
                   <div className="absolute top-full right-4 mt-2 w-48 bg-slate-50/90 bg-slate-900/90 rounded-lg shadow-lg md:hidden p-4 flex flex-col gap-3">
                     {items.map((item, index) => (
-                      <a
-                        key={index}
-                        href={item.link}
+                      <Link
                         className="text-white text-md font-medium px-3 py-2 rounded-md hover:bg-primary hover:text-background-dark transition-colors"
+                        key={index}
+                        to={item.link}
                       >
                         {item.name}
-                      </a>
+                      </Link>
                     ))}
                   </div>
                 )}

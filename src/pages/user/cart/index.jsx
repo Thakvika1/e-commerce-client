@@ -1,7 +1,7 @@
-import CartProduct from '../../../components/cards/CartProduct'
 import OrderSummary from './OrderSummary'
 import { useSelector } from 'react-redux'
 import EmptyCart from './EmptyCart'
+import CartList from './CartList'
 
 const Cart = () => {
   const cart = useSelector((state) => state.cart.items)
@@ -13,13 +13,7 @@ const Cart = () => {
           <EmptyCart />
         ) : (
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
-            <div className="lg:col-span-8 flex flex-col gap-6">
-              <div className=" rounded-xl shadow-sm border border-slate-100 dark:border-slate-800 divide-y divide-slate-100 dark:divide-slate-800 overflow-hidden">
-                {cart.map((item) => (
-                  <CartProduct key={item.id} item={item} />
-                ))}
-              </div>
-            </div>
+            <CartList cart={cart} />
             <OrderSummary />
           </div>
         )}

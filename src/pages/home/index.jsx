@@ -1,11 +1,11 @@
 import HeroSection from './HeroSection'
 import FeatureSection from './FeatureSection'
 import ProductContent from './ProductContent'
-// import { useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 
-const index = () => {
-  // const auth = useSelector((state) => state.auth)
-  // console.log('auth : ', auth)
+const Homepage = () => {
+  const auth = useSelector((state) => state.auth)
+  console.log('auth : ', auth)
   return (
     <>
       <main className="grow">
@@ -19,4 +19,4 @@ const index = () => {
   )
 }
 
-export default index
+export default Homepage

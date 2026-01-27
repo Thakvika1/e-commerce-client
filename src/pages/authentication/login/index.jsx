@@ -3,7 +3,7 @@ import HeadLine from './HeadLine'
 import Form from './Form'
 import Footer from './Footer'
 
-const index = () => {
+const Login = () => {
   return (
     <>
       <main className="flex-grow flex items-center justify-center p-4 sm:p-8 bg-background-light dark:bg-background-dark min-h-screen font-display">
@@ -19,4 +19,4 @@ const index = () => {
   )
 }
 
-export default index
+export default Login

@@ -10,6 +10,7 @@ const CreateProduct = () => {
     price: '',
     stock: '',
     category_id: '',
+    description: '',
   })
 
   const handleChange = (e) => {
@@ -35,7 +36,16 @@ const CreateProduct = () => {
         <input name="name" onChange={handleChange} placeholder="Name" />
         <input name="price" onChange={handleChange} placeholder="Price" />
         <input name="stock" onChange={handleChange} placeholder="Stock" />
-        <input name="category_id" onChange={handleChange} placeholder="Category Id" />
+        <input
+          name="category_id"
+          onChange={handleChange}
+          placeholder="Category Id"
+        />
+        <input
+          name="description"
+          onChange={handleChange}
+          placeholder="Description"
+        />
         <button disabled={isLoading}>Create</button>
         {error && <p>Error creating product</p>}
       </form>

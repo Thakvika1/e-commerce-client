@@ -13,7 +13,7 @@ import ProductDetail from '../pages/product-detail'
 import Cart from '../pages/user/cart'
 import AuthPageLayout from '../layouts/AuthPageLayout'
 
-import Product from '../pages/product-detail/Product'
+// import Product from '../pages/product-detail/Product'
 
 const HomepageRoute = () => {
   // route that already login can't access
@@ -32,7 +32,7 @@ const HomepageRoute = () => {
         <Route path={HOME} element={<Home />} />
         <Route path="/product/:id" element={<ProductDetail />} />
         <Route path={CART} element={<Cart />} />
-        <Route path="product-detail" element={<Product />} />
+        {/* <Route path="product-detail" element={<Product />} /> */}
 
         {/* Admin protected route */}
         <Route
@@ -53,7 +53,6 @@ const HomepageRoute = () => {
           />
         ))}
 
-        <Route path="/product-detail" element={<ProductDetail />} />
       </Route>
       <Route element={<AuthPageLayout />}>
         {/* user already logged in cannot access routes */}

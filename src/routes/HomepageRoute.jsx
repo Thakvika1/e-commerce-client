@@ -13,6 +13,8 @@ import ProductDetail from '../pages/product-detail'
 import Cart from '../pages/user/cart'
 import AuthPageLayout from '../layouts/AuthPageLayout'
 
+import Product from '../pages/product-detail/Product'
+
 const HomepageRoute = () => {
   // route that already login can't access
   const publicRoutes = [
@@ -30,6 +32,7 @@ const HomepageRoute = () => {
         <Route path={HOME} element={<Home />} />
         <Route path="/product/:id" element={<ProductDetail />} />
         <Route path={CART} element={<Cart />} />
+        <Route path="product-detail" element={<Product />} />
 
         {/* Admin protected route */}
         <Route

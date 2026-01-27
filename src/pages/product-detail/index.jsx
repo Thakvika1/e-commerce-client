@@ -1,5 +1,6 @@
 import { useParams } from 'react-router-dom'
 import { useGetProductByIdQuery } from '../../services/productApi'
+import Product from './Product'
 
 const ProductDetail = () => {
   const { id } = useParams()
@@ -16,6 +17,7 @@ const ProductDetail = () => {
         <h1>{data.item.name}</h1>
         <p>${data.item.price}</p>
         <p>{data.item.stock}</p>
+        {/* <Product /> */}
       </div>
     </>
   )

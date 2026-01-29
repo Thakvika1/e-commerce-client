@@ -2,7 +2,6 @@ import { useState } from 'react'
 
 import BlueDot from '../common/BlueDot'
 import MaterialLogo from '../common/MaterialLogo'
-import ButtonDarkMode from '../common/ButtonDarkMode'
 import { useSelector } from 'react-redux'
 import { CART } from '../../config/routes'
 import { Link } from 'react-router-dom'
@@ -24,7 +23,6 @@ const HomeNavbar = ({ items = [], username, blueDot }) => {
         <div className="max-w-[960px] mx-auto px-4 md:px-10 py-3">
           <div className="flex items-center justify-between gap-4">
             <div className="flex items-center gap-2 text-slate-900 dark:text-white cursor-pointer group">
-              <ButtonDarkMode />
               <h2 className="text-xl font-bold tracking-tight">
                 {auth ? `Welcome ${username}` : 'Welcome'}
               </h2>
@@ -43,16 +41,20 @@ const HomeNavbar = ({ items = [], username, blueDot }) => {
                     >
                       {item.name}
                     </Link>
-                    // <a
-                    //   key={index}
-                    //   className="text-sm font-medium hover:text-primary transition-colors"
-                    //   href={item.link}
-                    // >
-                    //   {item.name}
-                    // </a>
                   )
                 })}
               </div>
+              {auth ? (
+                <Link to={'/profile'}>
+                  <div
+                    className="size-10 rounded-full bg-slate-200 dark:bg-slate-700 bg-cover bg-center border-2 border-blue-300"
+                    style={{
+                      backgroundImage:
+                        'url("https://lh3.googleusercontent.com/aida-public/AB6AXuCZVyq1myWQVXict_z0ovXidBl-Y73xJuD3M-KIAa5CT-Pb8DeBWnkoMWMqABZvjT_eOEGRTIoUXTuW-uxE1fisSMumoXcYAfpZ_eek47opWIhxttNHI6VSgOOrHF_bx-JuVru_-2TwBnENdq8v1doWpNbwFyKLWuI1uKPgYAY_U_4yKT3dQjf-D8_EVxD4XIAG36cQD2uSSoAEBQodCt3z_U6GQfM3bHYkl6JvZTtUKJA6TgQ4Mny8IkHslK2Br1qIgCzi1e7CxXM")',
+                    }}
+                  />
+                </Link>
+              ) : null}
               <button className="relative p-2 text-slate-700 dark:text-slate-200 hover:bg-slate-200 dark:hover:bg-slate-800 rounded-lg transition-colors group cursor-pointer">
                 <Link to={CART}>
                   <MaterialLogo>shopping_cart</MaterialLogo>

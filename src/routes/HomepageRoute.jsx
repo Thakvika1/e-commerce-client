@@ -3,7 +3,6 @@ import { Route, Routes } from 'react-router-dom'
 import CreateProduct from '../pages/admin/CreateProduct'
 import ProtectedRoute from './ProtctedRoute'
 import PublicRoute from './PublicRoute'
-import UserDetail from '../pages/UserDetail'
 import AdminRoute from './AdminRoute'
 import Home from '../pages/home'
 import Login from '../pages/authentication/login'
@@ -12,8 +11,7 @@ import Register from '../pages/authentication/register'
 import ProductDetail from '../pages/product-detail'
 import Cart from '../pages/user/cart'
 import AuthPageLayout from '../layouts/AuthPageLayout'
-
-// import Product from '../pages/product-detail/Product'
+import Profile from '../pages/user/profile'
 
 const HomepageRoute = () => {
   // route that already login can't access
@@ -23,7 +21,7 @@ const HomepageRoute = () => {
   ]
 
   // auth route that need login to access
-  const authRoute = [{ path: '/user-detail', element: <UserDetail /> }]
+  const authRoute = [{ path: '/profile', element: <Profile /> }]
 
   return (
     <Routes>
@@ -32,7 +30,6 @@ const HomepageRoute = () => {
         <Route path={HOME} element={<Home />} />
         <Route path="/product/:id" element={<ProductDetail />} />
         <Route path={CART} element={<Cart />} />
-        {/* <Route path="product-detail" element={<Product />} /> */}
 
         {/* Admin protected route */}
         <Route
@@ -52,10 +49,10 @@ const HomepageRoute = () => {
             element={<ProtectedRoute>{element}</ProtectedRoute>}
           />
         ))}
-
       </Route>
+
+      {/* user already logged in cannot access routes */}
       <Route element={<AuthPageLayout />}>
-        {/* user already logged in cannot access routes */}
         {publicRoutes.map(({ path, element }) => (
           <Route
             key={path}

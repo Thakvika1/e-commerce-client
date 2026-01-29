@@ -7,10 +7,10 @@ const RelativeProduct = () => {
         Relative Product
       </h1>
       <div className="grid grid-cols-4 gap-4">
-        <button className="aspect-square overflow-hidden rounded-lg border-2 border-primary ring-2 ring-primary/20">
+        <button className="aspect-square overflow-hidden rounded-lg border border-transparent hover:border-gray-300 dark:hover:border-gray-600 transition-colors">
           <img
             alt="Thumbnail of headphones front view"
-            className="h-full w-full object-cover"
+            className="h-full w-full object-cover opacity-70 hover:opacity-100 transition-opacity"
             data-alt="Thumbnail of headphones front view"
             src="https://lh3.googleusercontent.com/aida-public/AB6AXuC68f8yaqN_xGi8L18sxuMMpmM3ijxnNJHe-ybupWMlXIlsMiCxKOeW1UniWcF_L9USv9bhIh-LBBVwXXLryHU5U1OtR-7lJCFQASiXg3LKDXizMg2cKIHNwF7-mh-GMwL3EfpSuu9dAvbTsM0peCH5bGg6j0l4PWDzdCifjf3JKjS80nJwOQY3h3ErW4SwYDPD4s2i2GqlxUg5KGRmCyt5q6mttbBYoB1mi2CD1tMzM_rlZckTrsMFKRspjkEctry4wcScU2bYP-c"
           />
@@ -31,16 +31,13 @@ const RelativeProduct = () => {
             src="https://lh3.googleusercontent.com/aida-public/AB6AXuAAJl3LbrS9vAk_IfBs01PZdhnRb8tukKXdYcg2pDjT0aVKRwJ6LATqViaHL-oQ9FIolpYnt4dtZ06YKgc5HapnrFF2rZbRkmLaPKd13Y40QRZfwA6ks5Rywsq1P5j-7YVhW9ahc_bjrgghJ6v4pubLpQ_3QL9rqf90fitp3bf6Q-vNcxLQYin7Dl7kp-CBSpAJWL0UhyAOSFuQKSK0FLneLHlGwEiBEauLvFEml6A_DKl-xL2OsCiUXAMeQUrwfyLhYL7DaMSbT0A"
           />
         </button>
-        <button className="aspect-square overflow-hidden rounded-lg border border-transparent hover:border-gray-300 dark:hover:border-gray-600 transition-colors relative">
+        <button className="aspect-square overflow-hidden rounded-lg border border-transparent hover:border-gray-300 dark:hover:border-gray-600 transition-colors">
           <img
             alt="Thumbnail of headphones detail view"
             className="h-full w-full object-cover opacity-70 hover:opacity-100 transition-opacity"
             data-alt="Thumbnail of headphones detail view"
             src="https://lh3.googleusercontent.com/aida-public/AB6AXuDkwa2Xp_4g84OKjzpSDwSUjKXmaCnFOMs6F5iC3BDUVv9jIoOrAMeewA1eviq8REzNlwYk2TvyAVsHFJZ7uFO99uatDLYZXnfFhTzi5LzCjKQvXSgKp2S5SQ4E9a3hinZySmqJY6GzcpQRkEAt8w_TOmpttL4lA1YOJdWA8ANx8e9mUPCqr6mXqs7fBk5h8RRDNPGR8ZcZUYSus2Y0SdTqYs6iALQ0WrgmMxlx3v195UH6nI_xeT6GAoINqlLfwHoEqBqF58IasqE"
           />
-          <div className="absolute inset-0 flex items-center justify-center bg-black/30 text-white text-xs font-bold rounded-lg pointer-events-none">
-            +2
-          </div>
         </button>
       </div>
     </>

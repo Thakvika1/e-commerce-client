@@ -47,6 +47,7 @@ const cartSlice = createSlice({
     removeFromCart: (state, action) => {
       state.items = state.items.filter((item) => item.id !== action.payload)
       sessionStorage.setItem('cart', JSON.stringify(state.items))
+      toast.dismiss()
       toast('Item removed ❌')
     },
 

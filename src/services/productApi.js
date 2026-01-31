@@ -9,7 +9,23 @@ export const productApi = createApi({
   endpoints: (builder) => ({
     // Fetch all products
     getProducts: builder.query({
-      query: () => 'product',
+      query: ({ page = 1 }) => `/product?page=${page}&per_page=10`,
+
+      // make all page use the same cache key
+      serializeQueryArgs: ({ endpointName }) => endpointName,
+
+      // merge paginated data
+      merge: (currentCache, newCache) => {
+        currentCache.data.data.push(...newCache.data.data)
+        currentCache.data.current_page = newCache.data.current_page
+        currentCache.data.last_page = newCache.data.last_page
+      },
+
+      // refetch when page change
+      forceRefetch: ({ currentArg, previousArg }) =>
+        currentArg?.page !== previousArg?.page,
+
+      
       providesTags: ['Product'],
     }),
 

@@ -21,6 +21,14 @@ export const authApi = createApi({
       }),
     }),
 
+    editUser: builder.mutation({
+      query: (userData) => ({
+        url: 'edit-profile',
+        method: 'PUT',
+        body: userData,
+      }),
+    }),
+
     getAuthUser: builder.query({
       query: () => 'user',
     }),
@@ -37,6 +45,7 @@ export const authApi = createApi({
 export const {
   useRegisterUserMutation,
   useLoginUserMutation,
+  useEditUserMutation,
   useGetAuthUserQuery,
   useLogoutUserMutation,
 } = authApi

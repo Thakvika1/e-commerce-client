@@ -1,4 +1,5 @@
 import useAuthUser from '../../../hooks/useAuthUser'
+import { Link } from 'react-router-dom'
 
 function ProfileCard() {
   const { user, isLoading } = useAuthUser()
@@ -13,7 +14,7 @@ function ProfileCard() {
               className="size-24 md:size-32 rounded-full bg-slate-100 dark:bg-slate-700 bg-cover bg-center border-4 border-white dark:border-slate-800 shadow-lg"
               style={{
                 backgroundImage:
-                  'url("https://lh3.googleusercontent.com/aida-public/AB6AXuCHFoM3rroQ1B53AizQ3gC1nyGP8cFXTGW3SBEzQGZCMhfc4Z8R6XcTWRisdhGrfxojxzRJVcnFbtcmI4DPSHogVVjvgW7bJVej0lubFsMGFLUp59rfaHjfmvSCUgceE8GHldFk8SRzU6uqkVYxxypudoMLWWknjjTi8zhS0qOS_0Y9JsAAfaBx5ZdrOmphQHwea8o-yDOUSg8VVG2Tf4xpzJVQzPsUJv4V7ADxUke1A4Li6qFkuBbqEUiRufbq1qugcSuu8PXD94s")',
+                  'url("https://lh3.googleusercontent.com/aida-public/AB6AXuAfUgd3DGwC1wGlGravbWznlbUvC8JYVmcO8Ct9dCi9rVWGnYNtOI7q53I0PHWhfv67FeuQpZ4MXu9_ez9fj36OKy6_JQEOLOFepSmLwDqID1ine6paubvj02wefUG7pF-sMZ7603Sv6KrsD-gnMXR3YSxqpd3010U3iWrcsd2nCA21ybDY7Uvt3W8mpa37aYbImmNjN5Q7iMqqh-kBFx1tUtrK6jwe7zat_5_xcnqb9K-UJycj824XDvbT44dx-wYOnyld4z91OI4")',
               }}
             />
             <div className="absolute bottom-1 right-1 bg-blue-500 text-white p-1.5 rounded-full border-2 border-white dark:border-slate-800 cursor-pointer hover:scale-105 transition-transform">
@@ -44,10 +45,12 @@ function ProfileCard() {
             </p>
           </div>
         </div>
-        <button className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-2.5 rounded-lg font-bold text-sm transition-all flex items-center gap-2">
-          <span className="material-symbols-outlined text-sm">edit</span>
-          Edit Profile
-        </button>
+        <Link to={'/profile/edit'}>
+          <button className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-2.5 rounded-lg font-bold text-sm transition-all flex items-center gap-2">
+            <span className="material-symbols-outlined text-sm">edit</span>
+            Edit Profile
+          </button>
+        </Link>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-10 pt-8 border-t border-slate-100 dark:border-slate-700">
         <div>

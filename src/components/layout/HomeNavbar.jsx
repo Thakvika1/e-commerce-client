@@ -47,7 +47,7 @@ const HomeNavbar = ({ items = [], username, blueDot }) => {
                       className="size-10 rounded-full bg-slate-200 dark:bg-slate-700 bg-cover bg-center border-2 border-blue-300"
                       style={{
                         backgroundImage:
-                          'url("https://lh3.googleusercontent.com/aida-public/AB6AXuCZVyq1myWQVXict_z0ovXidBl-Y73xJuD3M-KIAa5CT-Pb8DeBWnkoMWMqABZvjT_eOEGRTIoUXTuW-uxE1fisSMumoXcYAfpZ_eek47opWIhxttNHI6VSgOOrHF_bx-JuVru_-2TwBnENdq8v1doWpNbwFyKLWuI1uKPgYAY_U_4yKT3dQjf-D8_EVxD4XIAG36cQD2uSSoAEBQodCt3z_U6GQfM3bHYkl6JvZTtUKJA6TgQ4Mny8IkHslK2Br1qIgCzi1e7CxXM")',
+                          'url("https://lh3.googleusercontent.com/aida-public/AB6AXuAfUgd3DGwC1wGlGravbWznlbUvC8JYVmcO8Ct9dCi9rVWGnYNtOI7q53I0PHWhfv67FeuQpZ4MXu9_ez9fj36OKy6_JQEOLOFepSmLwDqID1ine6paubvj02wefUG7pF-sMZ7603Sv6KrsD-gnMXR3YSxqpd3010U3iWrcsd2nCA21ybDY7Uvt3W8mpa37aYbImmNjN5Q7iMqqh-kBFx1tUtrK6jwe7zat_5_xcnqb9K-UJycj824XDvbT44dx-wYOnyld4z91OI4")',
                       }}
                     />
                   </Link>

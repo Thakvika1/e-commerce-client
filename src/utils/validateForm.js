@@ -13,9 +13,15 @@ export const validateForm = (values, rules) => {
 
     // min length
     if (fieldRules.minLength && value.length < fieldRules.minLength) {
-      errors[
-        field
-      ] = `${field} must be at least ${fieldRules.minLength} characters`
+      errors[field] =
+        `${field} must be at least ${fieldRules.minLength} characters`
+      continue
+    }
+
+    // max length
+    if (fieldRules.maxLength && value.length > fieldRules.maxLength) {
+      errors[field] =
+        `${field} must be no more than ${fieldRules.maxLength} characters`
       continue
     }
 
@@ -40,6 +46,15 @@ export const validateForm = (values, rules) => {
     if (fieldRules.match) {
       if (value !== values[fieldRules.match]) {
         errors[field] = `${fieldRules.match} does not match`
+      }
+    }
+
+    // phone number
+    if (fieldRules.phone) {
+      const phoneRegex = /^\+?[1-9]\d{1,14}$/
+      if (value && !phoneRegex.test(value)) {
+        errors[field] = 'Invalid phone number'
+        continue
       }
     }
   }

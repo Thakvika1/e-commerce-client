@@ -6,6 +6,7 @@ const Input = ({
   type,
   placeholder,
   autoComplete,
+  value,
   className = '',
 }) => {
   return (
@@ -15,6 +16,7 @@ const Input = ({
       type={type}
       placeholder={placeholder}
       autoComplete={autoComplete}
+      value={value}
       required
       className={`
         w-full h-12 px-4 rounded-default

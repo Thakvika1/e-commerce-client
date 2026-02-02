@@ -12,6 +12,7 @@ import ProductDetail from '../pages/product-detail'
 import Cart from '../pages/user/cart'
 import AuthPageLayout from '../layouts/AuthPageLayout'
 import Profile from '../pages/user/profile'
+import EditProfile from '../pages/user/edit-profile'
 
 const HomepageRoute = () => {
   // route that already login can't access
@@ -21,7 +22,10 @@ const HomepageRoute = () => {
   ]
 
   // auth route that need login to access
-  const authRoute = [{ path: '/profile', element: <Profile /> }]
+  const authRoute = [
+    { path: '/profile', element: <Profile /> },
+    { path: '/profile/edit', element: <EditProfile /> },
+  ]
 
   return (
     <Routes>

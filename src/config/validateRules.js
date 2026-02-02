@@ -28,4 +28,24 @@ export const VALIDATION_RULES = {
       minLength: 8,
     },
   },
+
+  profileUpdate: {
+    name: {
+      required: true,
+      // onlyLetters: true,
+    },
+    email: {
+      required: true,
+      email: true,
+    },
+    phone_number: {
+      required: false,
+      phone: true,
+      maxLength: 15,
+    },
+    address: {
+      required: false,
+      maxLength: 150,
+    },
+  },
 }

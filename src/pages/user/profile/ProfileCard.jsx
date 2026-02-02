@@ -54,16 +54,20 @@ function ProfileCard() {
           <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-2">
             Phone Number
           </h4>
-          <p className="text-slate-900 dark:text-slate-200 font-medium">
-            +1 (555) 000-0000
+          <p
+            className={`font-medium ${!user?.phone_number ? 'text-red-500' : 'text-slate-600 dark:text-slate-200'} `}
+          >
+            {user?.phone_number ?? 'Not Provided'}
           </p>
         </div>
         <div>
           <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-2">
             Default Address
           </h4>
-          <p className="text-slate-900 dark:text-slate-200 font-medium">
-            123 Market St, San Francisco, CA 94103
+          <p
+            className={`font-medium ${!user?.address ? 'text-red-500' : 'text-slate-600 dark:text-slate-200'} `}
+          >
+            {user?.address ?? 'Not Provided'}
           </p>
         </div>
       </div>

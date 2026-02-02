@@ -80,7 +80,6 @@ const cartSlice = createSlice({
     clearCart: (state) => {
       state.items = []
       sessionStorage.removeItem('cart')
-      // toast.error('Cart cleared')
     },
   },
 })

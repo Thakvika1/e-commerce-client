@@ -46,7 +46,7 @@ const Modal = ({
                     <div className="mt-2">
                       <p className="text-sm text-gray-400">
                         {description ??
-                          'Are you sure you want to Logout from your account? All of your data will be permanently removed. This action cannot be undone.'}
+                          'Are you sure you want to Logout from your account? This action cannot be undone.'}
                       </p>
                     </div>
                   </div>

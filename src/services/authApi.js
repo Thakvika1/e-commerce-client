@@ -3,6 +3,7 @@ import { baseQueryWithToken } from '../utils/baseQueryWithToken'
 
 export const authApi = createApi({
   reducerPath: 'authApi',
+  tagTypes: ['User'],
   baseQuery: baseQueryWithToken,
   endpoints: (builder) => ({
     registerUser: builder.mutation({
@@ -27,10 +28,12 @@ export const authApi = createApi({
         method: 'PUT',
         body: userData,
       }),
+      invalidatesTags: ['User'],
     }),
 
     getAuthUser: builder.query({
       query: () => 'user',
+      providesTags: ['User'],
     }),
 
     logoutUser: builder.mutation({

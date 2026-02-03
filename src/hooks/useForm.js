@@ -19,7 +19,6 @@ export const useForm = (initialValues, rules) => {
       [name]: null,
     }))
   }
-  
 
   const handleSubmit = (onSubmit) => (e) => {
     e.preventDefault()
@@ -36,6 +35,7 @@ export const useForm = (initialValues, rules) => {
 
   return {
     formData,
+    setFormData,
     errors,
     setErrors,
     handleChange,

@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom'
 import { useEditUserMutation } from '../../../services/authApi'
 import toast from 'react-hot-toast'
 import { useNavigate } from 'react-router-dom'
+import { getFieldError, errorBorderClass } from '../../../utils/formErrors'
 
 const EditProfile = () => {
   const { user } = useAuthUser()
@@ -16,17 +17,25 @@ const EditProfile = () => {
 
   // if (isLoading) return null
 
-  const initialFormData = {
+  const initialValues = {
     name: user?.name || '',
     email: user?.email || '',
     phone_number: user?.phone_number || '',
     address: user?.address || '',
   }
 
-  const { errors, setErrors, handleChange, handleSubmit } = useForm(
-    initialFormData,
-    VALIDATION_RULES.profileUpdate
-  )
+  const {
+    formData,
+    setFormData,
+    errors,
+    setErrors,
+    handleChange,
+    handleSubmit,
+  } = useForm(initialValues, VALIDATION_RULES.profileUpdate)
+
+  // if (errors) {
+  //   console.log('errors : ', errors)
+  // }
 
   const profileImageUrl =
     'https://lh3.googleusercontent.com/aida-public/AB6AXuAfUgd3DGwC1wGlGravbWznlbUvC8JYVmcO8Ct9dCi9rVWGnYNtOI7q53I0PHWhfv67FeuQpZ4MXu9_ez9fj36OKy6_JQEOLOFepSmLwDqID1ine6paubvj02wefUG7pF-sMZ7603Sv6KrsD-gnMXR3YSxqpd3010U3iWrcsd2nCA21ybDY7Uvt3W8mpa37aYbImmNjN5Q7iMqqh-kBFx1tUtrK6jwe7zat_5_xcnqb9K-UJycj824XDvbT44dx-wYOnyld4z91OI4'
@@ -34,6 +43,7 @@ const EditProfile = () => {
   // Submit function receives actual formData
   const updateUser = async (data) => {
     try {
+      console.log('hello')
       await editUser(data).unwrap()
       toast.success('Profile updated successfully')
       navigate('/profile')
@@ -43,14 +53,6 @@ const EditProfile = () => {
       console.log('error : ', err)
     }
   }
-
-  // const handleOnSubmit = (e) => {
-  //   e.preventDefault()
-  //   console.log('submitted')
-  // }
-
-  // console.log(errors)
-
   return (
     <>
       <main className="flex flex-1 justify-center py-10 px-4">
@@ -83,7 +85,6 @@ const EditProfile = () => {
           <form
             className="flex flex-col gap-6"
             onSubmit={handleSubmit(updateUser)}
-            // onSubmit={handleOnSubmit
           >
             {/* Full Name Field */}
             <div className="flex flex-col gap-2">
@@ -95,9 +96,14 @@ const EditProfile = () => {
                 placeholder="Full Name"
                 handleChange={handleChange}
                 type={'text'}
-                value={initialFormData.name}
+                value={formData.name}
                 className="form-input flex w-full rounded-lg text-[#0d141b] dark:text-white dark:bg-slate-800 border border-[#cfdbe7] dark:border-slate-700 focus:border-[#2b8cee] focus:ring-1 focus:ring-[#2b8cee] h-14 p-4 text-base font-normal transition-all"
               />
+              {getFieldError(errors, 'name') && (
+                <p className="text-red-500 text-sm mt-1">
+                  {getFieldError(errors, 'name')}
+                </p>
+              )}
             </div>
 
             {/* Email Field */}
@@ -110,9 +116,14 @@ const EditProfile = () => {
                 placeholder="Email"
                 handleChange={handleChange}
                 type={'email'}
-                value={initialFormData.email}
+                value={formData.email}
                 className="form-input flex w-full rounded-lg text-[#0d141b] dark:text-white dark:bg-slate-800 border border-[#cfdbe7] dark:border-slate-700 focus:border-[#2b8cee] focus:ring-1 focus:ring-[#2b8cee] h-14 p-4 text-base font-normal transition-all"
               />
+              {getFieldError(errors, 'email') && (
+                <p className="text-red-500 text-sm mt-1">
+                  {getFieldError(errors, 'email')}
+                </p>
+              )}
             </div>
 
             {/* Phone Number Field */}
@@ -125,9 +136,14 @@ const EditProfile = () => {
                 placeholder="Phone Number"
                 handleChange={handleChange}
                 type={'tel'}
-                value={initialFormData.phone_number}
+                value={formData.phone_number}
                 className="form-input flex w-full rounded-lg text-[#0d141b] dark:text-white dark:bg-slate-800 border border-[#cfdbe7] dark:border-slate-700 focus:border-[#2b8cee] focus:ring-1 focus:ring-[#2b8cee] h-14 p-4 text-base font-normal transition-all"
               />
+              {getFieldError(errors, 'phone_number') && (
+                <p className="text-red-500 text-sm mt-1">
+                  {getFieldError(errors, 'phone_number')}
+                </p>
+              )}
             </div>
 
             {/* Address Field */}
@@ -137,11 +153,16 @@ const EditProfile = () => {
               </label>
               <textarea
                 className="form-input flex w-full rounded-lg text-[#0d141b] dark:text-white dark:bg-slate-800 border border-[#cfdbe7] dark:border-slate-700 focus:border-[#2b8cee] focus:ring-1 focus:ring-[#2b8cee] min-h-[100px] p-4 text-base font-normal transition-all"
-                placeholder="Enter your full street address"
+                placeholder="123 Sunset Avenue, Sangkat Boeung Keng Kang 1, Khan Chamkarmon, Phnom Penh, Cambodia"
                 name="address"
-                value={initialFormData.address}
+                value={formData.address}
                 onChange={handleChange}
               ></textarea>
+              {getFieldError(errors, 'address') && (
+                <p className="text-red-500 text-sm mt-1">
+                  {getFieldError(errors, 'address')}
+                </p>
+              )}
             </div>
 
             {/* Action Buttons */}
@@ -153,13 +174,11 @@ const EditProfile = () => {
               >
                 {isLoading ? 'Saving' : 'Save Changes'}
               </button>
-              <Link to={'/profile'}>
-                <button
-                  className="flex-1 bg-[#f6f7f8] dark:bg-slate-800 text-[#0d141b] dark:text-slate-200 font-bold py-3 px-6 rounded-lg border border-[#cfdbe7] dark:border-slate-700 hover:bg-[#e7edf3] dark:hover:bg-slate-700 transition-colors"
-                  type="button"
-                >
-                  Cancel
-                </button>
+              <Link
+                className="flex-1 bg-[#f6f7f8] dark:bg-slate-800 text-[#0d141b] dark:text-slate-200 font-bold py-3 px-6 rounded-lg border border-[#cfdbe7] dark:border-slate-700 hover:bg-[#e7edf3] dark:hover:bg-slate-700 transition-colors text-center"
+                to={'/profile'}
+              >
+                Cancel
               </Link>
             </div>
           </form>

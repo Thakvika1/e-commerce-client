@@ -45,11 +45,12 @@ function ProfileCard() {
             </p>
           </div>
         </div>
-        <Link to={'/profile/edit'}>
-          <button className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-2.5 rounded-lg font-bold text-sm transition-all flex items-center gap-2">
-            <span className="material-symbols-outlined text-sm">edit</span>
-            Edit Profile
-          </button>
+        <Link
+          className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-2.5 rounded-lg font-bold text-sm transition-all flex items-center gap-2"
+          to={'/profile/edit'}
+        >
+          <span className="material-symbols-outlined text-sm">edit</span>
+          Edit Profile
         </Link>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-10 pt-8 border-t border-slate-100 dark:border-slate-700">

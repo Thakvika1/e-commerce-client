@@ -40,7 +40,7 @@ export const VALIDATION_RULES = {
     },
     phone_number: {
       required: false,
-      phone: true,
+      // phone: true,
       maxLength: 15,
     },
     address: {

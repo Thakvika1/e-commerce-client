@@ -21,7 +21,7 @@ export const validateForm = (values, rules) => {
     // max length
     if (fieldRules.maxLength && value.length > fieldRules.maxLength) {
       errors[field] =
-        `${field} must be no more than ${fieldRules.maxLength} characters`
+        `The field must be no more than ${fieldRules.maxLength} characters`
       continue
     }
 
@@ -50,13 +50,13 @@ export const validateForm = (values, rules) => {
     }
 
     // phone number
-    if (fieldRules.phone) {
-      const phoneRegex = /^\+?[1-9]\d{1,14}$/
-      if (value && !phoneRegex.test(value)) {
-        errors[field] = 'Invalid phone number'
-        continue
-      }
-    }
+    // if (fieldRules.phone) {
+    //   const phoneRegex = /^\+?[1-9]\d{1,14}$/
+    //   if (value && !phoneRegex.test(value)) {
+    //     errors[field] = 'Invalid phone number'
+    //     continue
+    //   }
+    // }
   }
 
   return errors

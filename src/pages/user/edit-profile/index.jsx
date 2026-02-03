@@ -37,6 +37,23 @@ const EditProfile = () => {
   //   console.log('errors : ', errors)
   // }
 
+  const inputData = [
+    {
+      name: 'name',
+      label: 'Full Name',
+      type: 'text',
+      placeholder: 'Full Name',
+    },
+    { name: 'email', label: 'Email', type: 'email', placeholder: 'Email' },
+    {
+      name: 'phone_number',
+      label: 'Phone Number',
+      type: 'text',
+      placeholder: 'Phone Number',
+    },
+    // { name: 'address', label: 'Address', type: 'text', placeholder: 'Address' },
+  ]
+
   const profileImageUrl =
     'https://lh3.googleusercontent.com/aida-public/AB6AXuAfUgd3DGwC1wGlGravbWznlbUvC8JYVmcO8Ct9dCi9rVWGnYNtOI7q53I0PHWhfv67FeuQpZ4MXu9_ez9fj36OKy6_JQEOLOFepSmLwDqID1ine6paubvj02wefUG7pF-sMZ7603Sv6KrsD-gnMXR3YSxqpd3010U3iWrcsd2nCA21ybDY7Uvt3W8mpa37aYbImmNjN5Q7iMqqh-kBFx1tUtrK6jwe7zat_5_xcnqb9K-UJycj824XDvbT44dx-wYOnyld4z91OI4'
 
@@ -86,65 +103,26 @@ const EditProfile = () => {
             className="flex flex-col gap-6"
             onSubmit={handleSubmit(updateUser)}
           >
-            {/* Full Name Field */}
-            <div className="flex flex-col gap-2">
-              <label className="text-[#0d141b] dark:text-slate-200 text-base font-medium leading-normal">
-                Full Name
-              </label>
-              <Input
-                name="name"
-                placeholder="Full Name"
-                handleChange={handleChange}
-                type={'text'}
-                value={formData.name}
-                className={errorBorderClass(errors, 'name')}
-              />
-              {getFieldError(errors, 'name') && (
-                <p className="text-red-500 text-sm mt-1">
-                  {getFieldError(errors, 'name')}
-                </p>
-              )}
-            </div>
-
-            {/* Email Field */}
-            <div className="flex flex-col gap-2">
-              <label className="text-[#0d141b] dark:text-slate-200 text-base font-medium leading-normal">
-                Email
-              </label>
-              <Input
-                name="email"
-                placeholder="Email"
-                handleChange={handleChange}
-                type={'email'}
-                value={formData.email}
-                className={errorBorderClass(errors, 'email')}
-              />
-              {getFieldError(errors, 'email') && (
-                <p className="text-red-500 text-sm mt-1">
-                  {getFieldError(errors, 'email')}
-                </p>
-              )}
-            </div>
-
-            {/* Phone Number Field */}
-            <div className="flex flex-col gap-2">
-              <label className="text-[#0d141b] dark:text-slate-200 text-base font-medium leading-normal">
-                Phone Number
-              </label>
-              <Input
-                name="phone_number"
-                placeholder="Phone Number"
-                handleChange={handleChange}
-                type={'tel'}
-                value={formData.phone_number}
-                className={errorBorderClass(errors, 'phone_number')}
-              />
-              {getFieldError(errors, 'phone_number') && (
-                <p className="text-red-500 text-sm mt-1">
-                  {getFieldError(errors, 'phone_number')}
-                </p>
-              )}
-            </div>
+            {inputData.map((item, index) => (
+              <div key={index} className="flex flex-col gap-2">
+                <label className="text-[#0d141b] dark:text-slate-200 text-base font-medium leading-normal">
+                  {item.label}
+                </label>
+                <Input
+                  name={item.name}
+                  placeholder={item.placeholder}
+                  handleChange={handleChange}
+                  type={item.type}
+                  value={formData[item.name]}
+                  className={errorBorderClass(errors, item.name)}
+                />
+                {getFieldError(errors, item.name) && (
+                  <p className="text-red-500 text-sm mt-1">
+                    {getFieldError(errors, item.name)}
+                  </p>
+                )}
+              </div>
+            ))}
 
             {/* Address Field */}
             <div className="flex flex-col gap-2">

@@ -26,7 +26,7 @@ const EditProfile = () => {
 
   const {
     formData,
-    setFormData,
+    // setFormData,
     errors,
     setErrors,
     handleChange,
@@ -97,7 +97,7 @@ const EditProfile = () => {
                 handleChange={handleChange}
                 type={'text'}
                 value={formData.name}
-                className="form-input flex w-full rounded-lg text-[#0d141b] dark:text-white dark:bg-slate-800 border border-[#cfdbe7] dark:border-slate-700 focus:border-[#2b8cee] focus:ring-1 focus:ring-[#2b8cee] h-14 p-4 text-base font-normal transition-all"
+                className={errorBorderClass(errors, 'name')}
               />
               {getFieldError(errors, 'name') && (
                 <p className="text-red-500 text-sm mt-1">
@@ -117,7 +117,7 @@ const EditProfile = () => {
                 handleChange={handleChange}
                 type={'email'}
                 value={formData.email}
-                className="form-input flex w-full rounded-lg text-[#0d141b] dark:text-white dark:bg-slate-800 border border-[#cfdbe7] dark:border-slate-700 focus:border-[#2b8cee] focus:ring-1 focus:ring-[#2b8cee] h-14 p-4 text-base font-normal transition-all"
+                className={errorBorderClass(errors, 'email')}
               />
               {getFieldError(errors, 'email') && (
                 <p className="text-red-500 text-sm mt-1">
@@ -137,7 +137,7 @@ const EditProfile = () => {
                 handleChange={handleChange}
                 type={'tel'}
                 value={formData.phone_number}
-                className="form-input flex w-full rounded-lg text-[#0d141b] dark:text-white dark:bg-slate-800 border border-[#cfdbe7] dark:border-slate-700 focus:border-[#2b8cee] focus:ring-1 focus:ring-[#2b8cee] h-14 p-4 text-base font-normal transition-all"
+                className={errorBorderClass(errors, 'phone_number')}
               />
               {getFieldError(errors, 'phone_number') && (
                 <p className="text-red-500 text-sm mt-1">

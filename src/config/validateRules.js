@@ -2,6 +2,8 @@ export const VALIDATION_RULES = {
   register: {
     name: {
       required: true,
+      minLength: 3,
+      maxLength: 25,
       // onlyLetters: true,
     },
     email: {
@@ -32,6 +34,8 @@ export const VALIDATION_RULES = {
   profileUpdate: {
     name: {
       required: true,
+      minLength: 3,
+      maxLength: 25,
       // onlyLetters: true,
     },
     email: {

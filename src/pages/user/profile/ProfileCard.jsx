@@ -24,7 +24,7 @@ function ProfileCard() {
               <span className="material-symbols-outlined text-base">mail</span>
               {user?.email}
             </p>
-            <p className="text-slate-500 dark:text-slate-400 mt-1 flex items-center gap-2">
+            <p className="text-slate-500 dark:text-slate-400 mt-1 flex place-items-end gap-2">
               <span className="material-symbols-outlined text-base">
                 manage_accounts
               </span>

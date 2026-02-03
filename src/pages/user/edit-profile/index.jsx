@@ -1,4 +1,3 @@
-import React, { useState } from 'react'
 import Input from '../../../components/common/Input'
 import useAuthUser from '../../../hooks/useAuthUser'
 import { useForm } from '../../../hooks/useForm'
@@ -8,14 +7,13 @@ import { useEditUserMutation } from '../../../services/authApi'
 import toast from 'react-hot-toast'
 import { useNavigate } from 'react-router-dom'
 import { getFieldError, errorBorderClass } from '../../../utils/formErrors'
+import { useState } from 'react'
 
 const EditProfile = () => {
   const { user } = useAuthUser()
 
   const [editUser, { isLoading }] = useEditUserMutation()
   const navigate = useNavigate()
-
-  // if (isLoading) return null
 
   const initialValues = {
     name: user?.name || '',
@@ -37,6 +35,16 @@ const EditProfile = () => {
   //   console.log('errors : ', errors)
   // }
 
+  const [preview, setPreview] = useState(null)
+
+  const handleImageChange = (e) => {
+    const file = e.target.files[0]
+    if (!file) return
+
+    const imageUrl = URL.createObjectURL(file)
+    setPreview(imageUrl)
+  }
+
   const inputData = [
     {
       name: 'name',
@@ -51,7 +59,6 @@ const EditProfile = () => {
       type: 'text',
       placeholder: 'Phone Number',
     },
-    // { name: 'address', label: 'Address', type: 'text', placeholder: 'Address' },
   ]
 
   const profileImageUrl =
@@ -74,35 +81,51 @@ const EditProfile = () => {
     <>
       <main className="flex flex-1 justify-center py-10 px-4">
         <div className="layout-content-container flex flex-col max-w-[640px] flex-1 bg-white dark:bg-slate-900 p-8 rounded-xl shadow-sm border border-[#e7edf3] dark:border-slate-800 h-fit">
-          {/* ProfileHeader Section */}
-          <div className="flex flex-col items-center gap-6 mb-8">
-            <div className="relative group">
-              <div
-                className="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-32 ring-4 ring-blue-400/10"
-                style={{
-                  backgroundImage: `url("${user.image || profileImageUrl}")`,
-                }}
-                title="A smiling professional person looking at the camera"
-              ></div>
-              <button className="absolute bottom-0 right-0 bg-[#2b8cee] text-white p-2 rounded-full border-4 border-white dark:border-slate-900 hover:scale-105 transition-transform flex items-center justify-center shadow-md">
-                <span className="text-[20px]">📷</span>
-              </button>
-            </div>
-            <div className="flex flex-col items-center text-center">
-              <h1 className="text-[#0d141b] dark:text-white text-2xl font-bold leading-tight tracking-[-0.015em]">
-                Edit Profile
-              </h1>
-              <p className="text-[#4c739a] dark:text-slate-400 text-base font-normal">
-                Update your personal information and contact details
-              </p>
-            </div>
-          </div>
-
           {/* Form Section */}
           <form
             className="flex flex-col gap-6"
             onSubmit={handleSubmit(updateUser)}
           >
+            {/* ProfileHeader Section */}
+            <div className="flex flex-col items-center gap-6 mb-8">
+              <div className="relative group">
+                {/* Hidden file input */}
+                <input
+                  id="profile-image"
+                  type="file"
+                  accept="image/*"
+                  className="hidden"
+                  onChange={handleImageChange}
+                  // later you can add: onChange={handleImageChange}
+                />
+
+                {/* Image Preview */}
+                <label htmlFor="profile-image" className="cursor-pointer block">
+                  <div
+                    className="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-32 ring-4 ring-blue-400/10 transition-transform group-hover:scale-[1.02]"
+                    style={{
+                      backgroundImage: `url("${preview || user.image || profileImageUrl}")`,
+                    }}
+                  ></div>
+
+                  {/* Camera button */}
+                  <div className="absolute bottom-0 right-0 bg-blue-500 text-white p-2 rounded-full border-4 border-white dark:border-slate-900 hover:bg-blue-600 transition-all shadow-md">
+                    <span className="text-[20px]">📷</span>
+                  </div>
+                </label>
+              </div>
+
+              <div className="flex flex-col items-center text-center">
+                <h1 className="text-[#0d141b] dark:text-white text-2xl font-bold leading-tight tracking-[-0.015em]">
+                  Edit Profile
+                </h1>
+                <p className="text-[#4c739a] dark:text-slate-400 text-base font-normal">
+                  Update your personal information and contact details
+                </p>
+              </div>
+            </div>
+
+            {/* input field */}
             {inputData.map((item, index) => (
               <div key={index} className="flex flex-col gap-2">
                 <label className="text-[#0d141b] dark:text-slate-200 text-base font-medium leading-normal">

@@ -63,7 +63,7 @@ export const VALIDATION_RULES = {
     price: {
       required: true,
       numeric: true,
-      min: 0,
+      min: 1,
       max: 1000000,
     },
     stock: {

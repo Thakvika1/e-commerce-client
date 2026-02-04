@@ -57,6 +57,26 @@ export const validateForm = (values, rules) => {
     //     continue
     //   }
     // }
+
+    // min
+    if (fieldRules.min && value < fieldRules.min) {
+      errors[field] = `The field must be more than ${fieldRules.min}`
+      continue
+    }
+
+    // max
+    if (fieldRules.max && value > fieldRules.max) {
+      errors[field] = `The field must be no more than ${fieldRules.max}`
+      continue
+    }
+
+    // numeric
+    if (fieldRules.numeric) {
+      if (isNaN(value)) {
+        errors[field] = `${field} must be a number`
+        continue
+      }
+    }
   }
 
   return errors

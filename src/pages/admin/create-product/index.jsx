@@ -5,12 +5,13 @@ import { errorBorderClass, getFieldError } from '../../../utils/formErrors'
 import { useState } from 'react'
 import { useCreateProductMutation } from '../../../services/productApi'
 import { useGetCategoriesQuery } from '../../../services/categoryApi'
+import toast from 'react-hot-toast'
+import { useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 const CreateProduct = () => {
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    alert('Create Product — form submitted (demo)')
-  }
+  const navigate = useNavigate()
+  const [createProduct, { isLoading }] = useCreateProductMutation()
 
   const [image, setImage] = useState(null)
 
@@ -25,47 +26,40 @@ const CreateProduct = () => {
 
   const {
     formData,
-    setFormData,
+    // setFormData,
     errors,
     setErrors,
     handleChange,
-    // handleSubmit,
+    handleSubmit,
   } = useForm(initialValues, VALIDATION_RULES.createProduct)
 
+  // category fetching
   const {
     data,
     isLoading: isCategoriesLoading,
-    error,
+    // error: isCategoriesError,
   } = useGetCategoriesQuery()
+  if (isCategoriesLoading) return null
 
-  if (isCategoriesLoading) return <p>Loading categories...</p>
-  if (error) return <p>Error loading categories</p>
   const categories = data.data.data
   //   console.log('categories data : ', categories)
+
+  const createProductHandle = async (data) => {
+    try {
+      await createProduct(data).unwrap()
+      toast.success('Product Created Successfully')
+      navigate('/')
+    } catch (err) {
+      toast.error(err.data.message)
+      if (err?.data) setErrors(err.data)
+      console.log('error : ', err)
+    }
+  }
+  //   console.log('formData : ', formData)
 
   return (
     <>
       <main className="max-w-4xl mx-auto px-6 py-8">
-        <div className="flex flex-wrap gap-2 py-2 mb-4">
-          <a
-            className="text-[#4c739a] text-sm font-medium hover:underline"
-            href="#"
-          >
-            Home
-          </a>
-          <span className="text-[#4c739a] text-sm font-medium">/</span>
-          <a
-            className="text-[#4c739a] text-sm font-medium hover:underline"
-            href="#"
-          >
-            Products
-          </a>
-          <span className="text-[#4c739a] text-sm font-medium">/</span>
-          <span className="text-primary text-sm font-bold">
-            Create New Product
-          </span>
-        </div>
-
         <div className="mb-8">
           <h1 className="text-[#0d141b] dark:text-white text-4xl font-black leading-tight tracking-[-0.033em]">
             Create New Product
@@ -78,7 +72,10 @@ const CreateProduct = () => {
 
         <div className="bg-white dark:bg-slate-900 rounded-xl shadow-sm border border-[#cfdbe7] dark:border-slate-800 p-8">
           {/* form  */}
-          <form className="space-y-8" onSubmit={handleSubmit}>
+          <form
+            className="space-y-8"
+            onSubmit={handleSubmit(createProductHandle)}
+          >
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <label className="flex flex-col">
                 <span className="text-[#0d141b] dark:text-slate-200 text-base font-semibold pb-2">
@@ -89,8 +86,13 @@ const CreateProduct = () => {
                   placeholder="Product Name"
                   handleChange={handleChange}
                   type="text"
-                  className={errorBorderClass(errors, 'name', 'login')}
+                  className={errorBorderClass(errors, 'name')}
                 />
+                {getFieldError(errors, 'name') && (
+                  <p className="text-red-500 text-sm mt-1">
+                    {getFieldError(errors, 'name')}
+                  </p>
+                )}
               </label>
 
               <label className="flex flex-col">
@@ -99,22 +101,27 @@ const CreateProduct = () => {
                 </span>
                 <div>
                   <select
-                    className="appearance-none w-full rounded-xl border border-slate-300 dark:border-slate-700 
+                    onChange={handleChange}
+                    name="category_id"
+                    className={`appearance-none w-full rounded-xl border border-slate-300 dark:border-slate-700 
                             bg-white dark:bg-slate-800 text-slate-900 dark:text-white 
                             px-4 h-12 text-base font-medium 
                             focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500
-                            cursor-pointer transition-all"
+                            cursor-pointer transition-all ${errorBorderClass(errors, 'category_id')}`}
                   >
+                    <option value="">Select a category</option>
+
                     {categories.map((category) => (
-                      <option
-                        // className="rounded-xl"
-                        key={category.id}
-                        value={category.id}
-                      >
+                      <option key={category.id} value={category.id}>
                         {category.name}
                       </option>
                     ))}
                   </select>
+                  {getFieldError(errors, 'category_id') && (
+                    <p className="text-red-500 text-sm mt-1">
+                      {getFieldError(errors, 'category_id')}
+                    </p>
+                  )}
                 </div>
               </label>
             </div>
@@ -124,6 +131,8 @@ const CreateProduct = () => {
                 Product Description (optional)
               </span>
               <textarea
+                name="description"
+                onChange={handleChange}
                 className="form-input flex w-full rounded-lg text-[#0d141b] dark:text-white dark:bg-slate-800 border border-[#cfdbe7] dark:border-slate-700 focus:border-[#2b8cee] focus:ring-1 focus:ring-[#2b8cee] min-h-[100px] p-4 text-base font-normal transition-all"
                 placeholder="Tell customers about your product..."
               ></textarea>
@@ -135,7 +144,7 @@ const CreateProduct = () => {
                   Price $
                 </span>
                 <div className="relative">
-                  <span className="absolute left-4 top-1/2 -translate-y-1/2 text-[#4c739a] font-medium">
+                  <span className="absolute left-4 top-1/2 -translate-y-1/2 text-[#4c739a] font-medium ">
                     $
                   </span>
                   <Input
@@ -143,9 +152,14 @@ const CreateProduct = () => {
                     placeholder="Product Price"
                     handleChange={handleChange}
                     type="number"
-                    className={`${errorBorderClass(errors, 'price', 'login')} pl-7`}
+                    className={`${errorBorderClass(errors, 'price')} pl-7`}
                   />
                 </div>
+                {getFieldError(errors, 'price') && (
+                  <p className="text-red-500 text-sm mt-1">
+                    {getFieldError(errors, 'price')}
+                  </p>
+                )}
               </label>
               <label className="flex flex-col">
                 <span className="text-[#0d141b] dark:text-slate-200 text-base font-semibold pb-2">
@@ -156,8 +170,13 @@ const CreateProduct = () => {
                   placeholder="Quantity in Stock"
                   handleChange={handleChange}
                   type="number"
-                  className={`${errorBorderClass(errors, 'stock', 'login')}`}
+                  className={`${errorBorderClass(errors, 'stock')}`}
                 />
+                {getFieldError(errors, 'stock') && (
+                  <p className="text-red-500 text-sm mt-1">
+                    {getFieldError(errors, 'stock')}
+                  </p>
+                )}
               </label>
             </div>
 
@@ -180,26 +199,22 @@ const CreateProduct = () => {
             </div>
 
             <div className="pt-6 border-t border-slate-100 dark:border-slate-800 flex flex-col-reverse sm:flex-row justify-end gap-3">
-              <button
+              <Link
                 className="px-8 py-3 rounded-lg text-sm font-bold text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
-                type="button"
+                to={'/'}
               >
                 Cancel
-              </button>
+              </Link>
               <button
                 className="cursor-pointer px-8 py-3 rounded-lg bg-primary text-white text-sm font-bold shadow-md hover:bg-blue-600 hover:shadow-lg transition-all active:scale-[0.98]"
                 type="submit"
-                disabled={false}
+                disabled={isLoading}
               >
                 Create Product
               </button>
             </div>
           </form>
         </div>
-
-        <footer className="mt-12 text-center text-[#4c739a] text-sm">
-          <p>© 2024 Admin Dashboard. All inventory changes are logged.</p>
-        </footer>
       </main>
     </>
   )

@@ -184,7 +184,17 @@ const CreateProduct = () => {
               <p className="text-[#0d141b] dark:text-slate-200 text-base font-semibold pb-2">
                 Product Images
               </p>
-              <div className="border-2 border-dashed border-[#cfdbe7] dark:border-slate-700 rounded-xl p-10 flex flex-col items-center justify-center bg-background-light/50 dark:bg-slate-800/30 hover:border-primary/50 transition-all cursor-pointer">
+              <input
+                id="product-image"
+                type="file"
+                accept="image/*"
+                className="hidden"
+                //   onChange={handleImageChange}
+              />
+              <label
+                className="border-2 border-dashed border-[#cfdbe7] dark:border-slate-700 rounded-xl p-10 flex flex-col items-center justify-center bg-background-light/50 dark:bg-slate-800/30 hover:border-primary/50 transition-all cursor-pointer"
+                htmlFor="product-image"
+              >
                 <div className="size-14 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-4">
                   <span className="material-symbols-outlined text-3xl">
                     cloud_upload
@@ -195,7 +205,7 @@ const CreateProduct = () => {
                     Click to upload or drag and drop
                   </p>
                 </div>
-              </div>
+              </label>
             </div>
 
             <div className="pt-6 border-t border-slate-100 dark:border-slate-800 flex flex-col-reverse sm:flex-row justify-end gap-3">

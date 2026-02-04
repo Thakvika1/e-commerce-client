@@ -1,6 +1,6 @@
 import HomepageLayout from '../layouts/HomepageLayout'
 import { Route, Routes } from 'react-router-dom'
-import CreateProduct from '../pages/admin/CreateProduct'
+// import CreateProduct from '../pages/admin/CreateProduct'
 import ProtectedRoute from './ProtctedRoute'
 import PublicRoute from './PublicRoute'
 import AdminRoute from './AdminRoute'
@@ -13,6 +13,7 @@ import Cart from '../pages/user/cart'
 import AuthPageLayout from '../layouts/AuthPageLayout'
 import Profile from '../pages/user/profile'
 import EditProfile from '../pages/user/edit-profile'
+import CreateProduct from '../pages/admin/create-product'
 
 const HomepageRoute = () => {
   // route that already login can't access

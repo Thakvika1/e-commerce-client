@@ -7,6 +7,7 @@ const Input = ({
   placeholder,
   autoComplete,
   value,
+  min,
   className = '',
 }) => {
   return (
@@ -17,6 +18,7 @@ const Input = ({
       placeholder={placeholder}
       autoComplete={autoComplete}
       value={value}
+      min={min}
       required
       className={`
         w-full h-12 px-4 rounded-default

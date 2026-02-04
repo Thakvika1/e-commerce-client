@@ -52,4 +52,33 @@ export const VALIDATION_RULES = {
       maxLength: 150,
     },
   },
+
+  createProduct: {
+    name: {
+      required: true,
+      minLength: 5,
+      maxLength: 50,
+      // onlyLetters: true,
+    },
+    price: {
+      required: true,
+      numeric: true,
+      min: 0,
+      max: 1000000,
+    },
+    stock: {
+      required: true,
+      numeric: true,
+      min: 1,
+    },
+    category_id: {
+      required: true,
+      numeric: true,
+    },
+    description: {
+      required: false,
+      minLength: 10,
+      maxLength: 300,
+    },
+  },
 }

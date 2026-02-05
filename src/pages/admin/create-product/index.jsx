@@ -12,8 +12,19 @@ import { Link } from 'react-router-dom'
 const CreateProduct = () => {
   const navigate = useNavigate()
   const [createProduct, { isLoading }] = useCreateProductMutation()
+  const [isSubmitting, setIsSubmitting] = useState(false)
 
   const [image, setImage] = useState(null)
+
+  // Handle image selection and preview
+  const handleImageChange = (e) => {
+    const file = e.target.files[0]
+    if (!file) return
+
+    setImage(file)
+    // const imageUrl = URL.createObjectURL(file)
+    // setImage(imageUrl)
+  }
 
   const initialValues = {
     name: '',
@@ -21,7 +32,6 @@ const CreateProduct = () => {
     stock: '',
     category_id: '',
     description: '',
-    image: '',
   }
 
   const {
@@ -33,6 +43,7 @@ const CreateProduct = () => {
     handleSubmit,
   } = useForm(initialValues, VALIDATION_RULES.createProduct)
 
+  // console.log(errors)
   // category fetching
   const {
     data,
@@ -45,12 +56,28 @@ const CreateProduct = () => {
   //   console.log('categories data : ', categories)
 
   const createProductHandle = async (data) => {
+    // prevent double submit
+    if (isSubmitting) return
+    setIsSubmitting(true)
+
     try {
-      await createProduct(data).unwrap()
+      // FormData is a built-in browser class, and JavaScript is case-sensitive:
+      const form = new FormData()
+      form.append('name', data.name)
+      form.append('price', data.price)
+      form.append('category_id', data.category_id)
+      form.append('stock', data.stock)
+      form.append('description', data.description)
+      form.append('image', image)
+      // data.append('image', image)
+
+      // console.log(data)
+
+      await createProduct(form).unwrap()
       toast.success('Product Created Successfully')
       navigate('/')
     } catch (err) {
-      toast.error(err.data.message)
+      toast.error(err?.data?.message)
       if (err?.data) setErrors(err.data)
       console.log('error : ', err)
     }
@@ -136,6 +163,11 @@ const CreateProduct = () => {
                 className="form-input flex w-full rounded-lg text-[#0d141b] dark:text-white dark:bg-slate-800 border border-[#cfdbe7] dark:border-slate-700 focus:border-[#2b8cee] focus:ring-1 focus:ring-[#2b8cee] min-h-[100px] p-4 text-base font-normal transition-all"
                 placeholder="Tell customers about your product..."
               ></textarea>
+              {getFieldError(errors, 'description') && (
+                <p className="text-red-500 text-sm mt-1">
+                  {getFieldError(errors, 'description')}
+                </p>
+              )}
             </label>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -189,23 +221,42 @@ const CreateProduct = () => {
                 type="file"
                 accept="image/*"
                 className="hidden"
-                //   onChange={handleImageChange}
+                onChange={handleImageChange}
               />
               <label
-                className="border-2 border-dashed border-[#cfdbe7] dark:border-slate-700 rounded-xl p-10 flex flex-col items-center justify-center bg-background-light/50 dark:bg-slate-800/30 hover:border-primary/50 transition-all cursor-pointer"
+                className=" border-2 border-dashed border-[#cfdbe7] dark:border-slate-700 rounded-xl p-10 flex flex-col items-center justify-center bg-background-light/50 dark:bg-slate-800/30 hover:border-primary/50 transition-all cursor-pointer"
                 htmlFor="product-image"
               >
-                <div className="size-14 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-4">
-                  <span className="material-symbols-outlined text-3xl">
-                    cloud_upload
-                  </span>
-                </div>
-                <div className="text-center">
-                  <p className="text-[#0d141b] dark:text-slate-200 text-base font-bold">
-                    Click to upload or drag and drop
-                  </p>
-                </div>
+                {image ? (
+                  <div
+                    className="bg-center bg-no-repeat aspect-square bg-cover rounded-2xl size-40 shadow-md transition-all group-hover:scale-[1.02]"
+                    style={{
+                      backgroundImage: `url("${image ? URL.createObjectURL(image) : ''}")`,
+                    }}
+                  />
+                ) : (
+                  <>
+                    <div className="size-14 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-4">
+                      <span className="material-symbols-outlined text-3xl">
+                        cloud_upload
+                      </span>
+                    </div>
+                    <div className="text-center">
+                      <p className="text-[#0d141b] dark:text-slate-200 text-base font-bold">
+                        Click to upload or drag and drop
+                      </p>
+                      <p className="text-slate-500 dark:text-slate-400 text-sm mt-1">
+                        PNG, JPG, or JPEG (max 2MB)
+                      </p>
+                    </div>
+                  </>
+                )}
               </label>
+              {getFieldError(errors, 'image') && (
+                <p className="text-red-500 text-sm mt-1">
+                  {getFieldError(errors, 'image')}
+                </p>
+              )}
             </div>
 
             <div className="pt-6 border-t border-slate-100 dark:border-slate-800 flex flex-col-reverse sm:flex-row justify-end gap-3">
@@ -218,9 +269,9 @@ const CreateProduct = () => {
               <button
                 className="cursor-pointer px-8 py-3 rounded-lg bg-primary text-white text-sm font-bold shadow-md hover:bg-blue-600 hover:shadow-lg transition-all active:scale-[0.98]"
                 type="submit"
-                disabled={isLoading}
+                disabled={isLoading || isSubmitting}
               >
-                Create Product
+                {isLoading || isSubmitting ? 'Creating...' : 'Create Product'}
               </button>
             </div>
           </form>

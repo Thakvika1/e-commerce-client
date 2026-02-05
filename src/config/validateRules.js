@@ -77,7 +77,7 @@ export const VALIDATION_RULES = {
     },
     description: {
       required: false,
-      minLength: 10,
+      // minLength: 10,
       maxLength: 300,
     },
   },

@@ -8,6 +8,9 @@ import {
 const CartProduct = ({ item }) => {
   const dispatch = useDispatch()
 
+  console.log(item.image)
+  console.log(item.name)
+
   return (
     <>
       <div className="p-6 flex flex-col sm:flex-row gap-6 group hover:bg-slate-200 dark:hover:bg-slate-800/50 transition-colors">
@@ -15,8 +18,7 @@ const CartProduct = ({ item }) => {
         <div
           className="w-full sm:w-32 aspect-square rounded-lg  bg-cover bg-center shrink-0 border border-slate-200 dark:border-slate-700"
           style={{
-            backgroundImage:
-              'url(https://lh3.googleusercontent.com/aida-public/AB6AXuCrk1Dvy6VZd8L5LB-6MJWqZpKvT-1idW5CyRscZifmEefyI8gohGgbEUh8XZ9HRoL5Kd6Pd0yYCym3LiJGePEGgIlLJP3ntGYYHiBzcM6Fa2vKVr2OHkzon-SkNExsxZaoA4429g2AVJ2Bi-y1kPnxzyg12kjeXKVN6m2USJW0r0wxeJG5M4hjT1_6mPaXPoR9P37YdCGKrD69qhGkSyncxdJVDMlnfd_ZHpB9Udf4oPAwAlffYZi38aAyvTr2aBHrTruPmYUKjIo',
+            backgroundImage: `url(${item.image ?? 'https://lh3.googleusercontent.com/aida-public/AB6AXuCrk1Dvy6VZd8L5LB-6MJWqZpKvT-1idW5CyRscZifmEefyI8gohGgbEUh8XZ9HRoL5Kd6Pd0yYCym3LiJGePEGgIlLJP3ntGYYHiBzcM6Fa2vKVr2OHkzon-SkNExsxZaoA4429g2AVJ2Bi-y1kPnxzyg12kjeXKVN6m2USJW0r0wxeJG5M4hjT1_6mPaXPoR9P37YdCGKrD69qhGkSyncxdJVDMlnfd_ZHpB9Udf4oPAwAlffYZi38aAyvTr2aBHrTruPmYUKjIo'}`,
           }}
         ></div>
         {/* <!-- Details --> */}

@@ -67,7 +67,6 @@ const EditProfile = () => {
   // Submit function receives actual formData
   const updateUser = async (data) => {
     try {
-      console.log('hello')
       await editUser(data).unwrap()
       toast.success('Profile updated successfully')
       navigate('/profile')

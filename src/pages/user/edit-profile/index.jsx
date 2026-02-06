@@ -41,8 +41,7 @@ const EditProfile = () => {
     const file = e.target.files[0]
     if (!file) return
 
-    const imageUrl = URL.createObjectURL(file)
-    setPreview(imageUrl)
+    setPreview(file)
   }
 
   const inputData = [
@@ -103,7 +102,7 @@ const EditProfile = () => {
                   <div
                     className="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-32 ring-4 ring-blue-400/10 transition-transform group-hover:scale-[1.02]"
                     style={{
-                      backgroundImage: `url("${preview || user.image || profileImageUrl}")`,
+                      backgroundImage: `url("${URL.createObjectURL(preview) || user.image || profileImageUrl}")`,
                     }}
                   ></div>
 

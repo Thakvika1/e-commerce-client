@@ -8,12 +8,12 @@ import { useGetCategoriesQuery } from '../../../services/categoryApi'
 import toast from 'react-hot-toast'
 import { useNavigate } from 'react-router-dom'
 import { Link } from 'react-router-dom'
+import Header from './Header'
+import InputImage from './InputImage'
 
 const CreateProduct = () => {
   const navigate = useNavigate()
   const [createProduct, { isLoading }] = useCreateProductMutation()
-
-  // const [isSubmitting, setIsSubmitting] = useState(false)
 
   // Handle image selection and preview
   const [image, setImage] = useState(null)
@@ -55,10 +55,6 @@ const CreateProduct = () => {
   //   console.log('categories data : ', categories)
 
   const handleCreateProduct = async (data) => {
-    // prevent double submit
-    // if (isSubmitting) return
-    // setIsSubmitting(true)
-
     try {
       // FormData is a built-in browser class, and JavaScript is case-sensitive:
       const form = new FormData()
@@ -86,15 +82,7 @@ const CreateProduct = () => {
   return (
     <>
       <main className="max-w-4xl mx-auto px-6 py-8">
-        <div className="mb-8">
-          <h1 className="text-[#0d141b] dark:text-white text-4xl font-black leading-tight tracking-[-0.033em]">
-            Create New Product
-          </h1>
-          <p className="text-[#4c739a] dark:text-slate-400 text-base font-normal mt-2">
-            Add high-quality photos and detailed descriptions to boost your
-            sales.
-          </p>
-        </div>
+        <Header />
 
         <div className="bg-white dark:bg-slate-900 rounded-xl shadow-sm border border-[#cfdbe7] dark:border-slate-800 p-8">
           {/* form  */}
@@ -211,52 +199,11 @@ const CreateProduct = () => {
               </label>
             </div>
 
-            <div>
-              <p className="text-[#0d141b] dark:text-slate-200 text-base font-semibold pb-2">
-                Product Images
-              </p>
-              <input
-                id="product-image"
-                type="file"
-                accept="image/*"
-                className="hidden"
-                onChange={handleImageChange}
-              />
-              <label
-                className=" border-2 border-dashed border-[#cfdbe7] dark:border-slate-700 rounded-xl p-10 flex flex-col items-center justify-center bg-background-light/50 dark:bg-slate-800/30 hover:border-primary/50 transition-all cursor-pointer"
-                htmlFor="product-image"
-              >
-                {image ? (
-                  <div
-                    className="bg-center bg-no-repeat aspect-square bg-cover rounded-2xl size-40 shadow-md transition-all group-hover:scale-[1.02]"
-                    style={{
-                      backgroundImage: `url("${image ? URL.createObjectURL(image) : ''}")`,
-                    }}
-                  />
-                ) : (
-                  <>
-                    <div className="size-14 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-4">
-                      <span className="material-symbols-outlined text-3xl">
-                        cloud_upload
-                      </span>
-                    </div>
-                    <div className="text-center">
-                      <p className="text-[#0d141b] dark:text-slate-200 text-base font-bold">
-                        Click to upload or drag and drop
-                      </p>
-                      <p className="text-slate-500 dark:text-slate-400 text-sm mt-1">
-                        PNG, JPG, or JPEG (max 2MB)
-                      </p>
-                    </div>
-                  </>
-                )}
-              </label>
-              {getFieldError(errors, 'image') && (
-                <p className="text-red-500 text-sm mt-1">
-                  {getFieldError(errors, 'image')}
-                </p>
-              )}
-            </div>
+            <InputImage
+              imageError={getFieldError(errors, 'image')}
+              image={image}
+              handleImageChange={handleImageChange}
+            />
 
             <div className="pt-6 border-t border-slate-100 dark:border-slate-800 flex flex-col-reverse sm:flex-row justify-end gap-3">
               <Link

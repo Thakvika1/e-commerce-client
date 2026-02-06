@@ -12,18 +12,17 @@ import { Link } from 'react-router-dom'
 const CreateProduct = () => {
   const navigate = useNavigate()
   const [createProduct, { isLoading }] = useCreateProductMutation()
-  const [isSubmitting, setIsSubmitting] = useState(false)
 
-  const [image, setImage] = useState(null)
+  // const [isSubmitting, setIsSubmitting] = useState(false)
 
   // Handle image selection and preview
+  const [image, setImage] = useState(null)
+
   const handleImageChange = (e) => {
     const file = e.target.files[0]
     if (!file) return
 
     setImage(file)
-    // const imageUrl = URL.createObjectURL(file)
-    // setImage(imageUrl)
   }
 
   const initialValues = {
@@ -35,7 +34,7 @@ const CreateProduct = () => {
   }
 
   const {
-    formData,
+    // formData,
     // setFormData,
     errors,
     setErrors,
@@ -55,10 +54,10 @@ const CreateProduct = () => {
   const categories = data.data.data
   //   console.log('categories data : ', categories)
 
-  const createProductHandle = async (data) => {
+  const handleCreateProduct = async (data) => {
     // prevent double submit
-    if (isSubmitting) return
-    setIsSubmitting(true)
+    // if (isSubmitting) return
+    // setIsSubmitting(true)
 
     try {
       // FormData is a built-in browser class, and JavaScript is case-sensitive:
@@ -101,7 +100,7 @@ const CreateProduct = () => {
           {/* form  */}
           <form
             className="space-y-8"
-            onSubmit={handleSubmit(createProductHandle)}
+            onSubmit={handleSubmit(handleCreateProduct)}
           >
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <label className="flex flex-col">
@@ -269,9 +268,9 @@ const CreateProduct = () => {
               <button
                 className="cursor-pointer px-8 py-3 rounded-lg bg-primary text-white text-sm font-bold shadow-md hover:bg-blue-600 hover:shadow-lg transition-all active:scale-[0.98]"
                 type="submit"
-                disabled={isLoading || isSubmitting}
+                disabled={isLoading}
               >
-                {isLoading || isSubmitting ? 'Creating...' : 'Create Product'}
+                {isLoading ? 'Creating...' : 'Create Product'}
               </button>
             </div>
           </form>

@@ -6,7 +6,7 @@ import PublicRoute from './PublicRoute'
 import AdminRoute from './AdminRoute'
 import Home from '../pages/home'
 import Login from '../pages/authentication/login'
-import { HOME, CART, LOGIN, REGISTER } from '../config/routes'
+import { HOME, CART, LOGIN, REGISTER, CREATE_PRODUCT } from '../config/routes'
 import Register from '../pages/authentication/register'
 import ProductDetail from '../pages/product-detail'
 import Cart from '../pages/user/cart'
@@ -38,7 +38,7 @@ const HomepageRoute = () => {
 
         {/* Admin protected route */}
         <Route
-          path="/admin/create-product"
+          path={CREATE_PRODUCT}
           element={
             <AdminRoute>
               <CreateProduct />

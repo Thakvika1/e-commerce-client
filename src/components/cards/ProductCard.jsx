@@ -28,8 +28,8 @@ const ProductCard = ({ product }) => {
             style={{
               backgroundImage: `url(${
                 // `http://127.0.0.1:8000/storage/${product.image}`
-                product.image ??
-                'https://lh3.googleusercontent.com/aida-public/AB6AXuCtI_oZAZfaJ7kR1gGdgkAnBgzTVS0sxu3dMWgN9_jqVTuF7TAQrsRPUqgng77e0m6qdag15eoJnqAIsN0v0-GX09r12tuJK8AUniuBHM6RZss9Y9zwuWG3isERUmV6UQ7Xy8Yu4GrP0ALPlQEhLPYwUs4t443Adslq-WcMcWppOC9EJGmLr3hJNOsXo4V44Qf9tQJ0kSdbAtm_WX3WUbt_09DDEowKbNEmUdUW5QQfGAT042GD71g6Jmcgpqzh4u31Xu8lkS630KI'
+                // `http://127.0.0.1:8000/api/products/image/${product.image}`
+                product.image
               })`,
             }}
           ></div>

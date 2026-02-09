@@ -28,11 +28,11 @@ const cartSlice = createSlice({
         toast.success('Added to cart 🛒')
       }
       // limit NEW items only
-      else if (state.items.length >= 10) {
-        toast.dismiss()
-        toast.error('You can only add 10 items to Cart !!')
-        return
-      }
+      // else if (state.items.length >= 10) {
+      //   toast.dismiss()
+      //   toast.error('You can only add 10 items to Cart !!')
+      //   return
+      // }
       // new item
       else {
         state.items.push({ ...item, quantity: 1 })

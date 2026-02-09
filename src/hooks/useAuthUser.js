@@ -8,8 +8,10 @@ const useAuthUser = () => {
     skip: !token,
   })
 
+  // console.log(data?.data)
+
   return {
-    user: data?.user ?? null,
+    user: data?.data ?? null,
     isLoading,
     error,
   }

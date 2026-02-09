@@ -25,7 +25,7 @@ export const authApi = createApi({
     editUser: builder.mutation({
       query: (userData) => ({
         url: 'edit-profile',
-        method: 'PUT',
+        method: 'POST',
         body: userData,
       }),
       invalidatesTags: ['User'],

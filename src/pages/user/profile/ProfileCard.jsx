@@ -12,8 +12,7 @@ function ProfileCard() {
           <div
             className="size-24 md:size-32 rounded-full bg-slate-100 dark:bg-slate-700 bg-cover bg-center border-4 border-blue-500 dark:border-slate-800 shadow-lg"
             style={{
-              backgroundImage:
-                'url("https://lh3.googleusercontent.com/aida-public/AB6AXuAfUgd3DGwC1wGlGravbWznlbUvC8JYVmcO8Ct9dCi9rVWGnYNtOI7q53I0PHWhfv67FeuQpZ4MXu9_ez9fj36OKy6_JQEOLOFepSmLwDqID1ine6paubvj02wefUG7pF-sMZ7603Sv6KrsD-gnMXR3YSxqpd3010U3iWrcsd2nCA21ybDY7Uvt3W8mpa37aYbImmNjN5Q7iMqqh-kBFx1tUtrK6jwe7zat_5_xcnqb9K-UJycj824XDvbT44dx-wYOnyld4z91OI4")',
+              backgroundImage: `url(${user?.image})`,
             }}
           />
           <div>

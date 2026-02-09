@@ -20,6 +20,7 @@ const HomepageLayout = () => {
         items={auth ? navbarData : guestNavbarData}
         username={user?.name}
         blueDot={cart.length > 0}
+        image={user?.image}
       />
 
       <Toaster position="top-center" />

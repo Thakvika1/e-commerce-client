@@ -66,7 +66,15 @@ const EditProfile = () => {
   // Submit function receives actual formData
   const updateUser = async (data) => {
     try {
-      await editUser(data).unwrap()
+      const form = new FormData()
+      form.append('name', data.name)
+      form.append('email', data.email)
+      form.append('phone_number', data.phone_number)
+      form.append('image', preview)
+      form.append('address', data.address)
+      form.append('_method', 'PUT')
+
+      await editUser(form).unwrap()
       toast.success('Profile updated successfully')
       navigate('/profile')
     } catch (err) {
@@ -102,7 +110,11 @@ const EditProfile = () => {
                   <div
                     className="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-32 ring-4 ring-blue-400/10 transition-transform group-hover:scale-[1.02]"
                     style={{
-                      backgroundImage: `url("${URL.createObjectURL(preview) || user.image || profileImageUrl}")`,
+                      backgroundImage: `url("${
+                        preview
+                          ? URL.createObjectURL(preview)
+                          : user?.image || profileImageUrl
+                      }")`,
                     }}
                   ></div>
 

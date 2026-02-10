@@ -4,6 +4,7 @@ const OrderSummary = () => {
   const cart = useSelector((state) => state.cart.items)
 
   const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0)
+  const formattedTotal = Number(total.toFixed(3))
   return (
     <>
       <div className="lg:col-span-4 relative">
@@ -42,7 +43,7 @@ const OrderSummary = () => {
                 Order Total
               </span>
               <span className="text-2xl font-black text-slate-900 dark:text-white">
-                ${total}
+                ${formattedTotal}
               </span>
             </div>
             {/* <!-- Checkout Button --> */}

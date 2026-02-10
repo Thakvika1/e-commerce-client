@@ -70,7 +70,10 @@ const EditProfile = () => {
       form.append('name', data.name)
       form.append('email', data.email)
       form.append('phone_number', data.phone_number)
-      form.append('image', preview)
+      if (preview !== null) {
+        form.append('image', preview)
+      }
+
       form.append('address', data.address)
       form.append('_method', 'PUT')
 

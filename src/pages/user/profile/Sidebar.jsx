@@ -13,6 +13,7 @@ function Sidebar() {
   const navItems = [
     { icon: 'person', label: 'Profile', link: '' },
     { icon: 'package_2', label: 'My Orders', link: 'orders' },
+
     // { id: 'wishlist', icon: 'favorite', label: 'Wishlist' },
     // { id: 'settings', icon: 'settings', label: 'Settings' },
   ]

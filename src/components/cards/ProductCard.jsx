@@ -27,8 +27,6 @@ const ProductCard = ({ product }) => {
             className="w-full h-full bg-cover bg-center group-hover:scale-110 transition-transform duration-500"
             style={{
               backgroundImage: `url(${
-                // `http://127.0.0.1:8000/storage/${product.image}`
-                // `http://127.0.0.1:8000/api/products/image/${product.image}`
                 product.image
               })`,
             }}

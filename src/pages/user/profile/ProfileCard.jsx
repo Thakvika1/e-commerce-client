@@ -1,10 +1,6 @@
-import useAuthUser from '../../../hooks/useAuthUser'
 import { Link } from 'react-router-dom'
 
-function ProfileCard() {
-  const { user, isLoading } = useAuthUser()
-
-  if (isLoading) return null
+function ProfileCard({ user }) {
   return (
     <div className="bg-white dark:bg-slate-800 rounded-xl p-8 shadow-sm border border-slate-200 dark:border-slate-700">
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">

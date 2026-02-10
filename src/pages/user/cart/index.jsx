@@ -2,6 +2,7 @@ import OrderSummary from './OrderSummary'
 import { useSelector } from 'react-redux'
 import EmptyCart from './EmptyCart'
 import CartList from './CartList'
+import CartTitle from './CartTitle'
 
 const Cart = () => {
   const cart = useSelector((state) => state.cart.items)
@@ -9,6 +10,7 @@ const Cart = () => {
   return (
     <>
       <main className="grow w-full max-w-7xl mx-auto px-4 md:px-10 py-8 md:py-12">
+        <CartTitle totalItem={cart.length} />
         {cart.length === 0 ? (
           <EmptyCart />
         ) : (

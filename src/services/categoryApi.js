@@ -8,10 +8,15 @@ export const categoryApi = createApi({
 
   endpoints: (builder) => ({
     getCategories: builder.query({
-        query: () => '/category',
-        providesTags: ['Category'],
-    })
-  })
+      query: () => '/category',
+      providesTags: ['Category'],
+    }),
+
+    getCategoryById: builder.query({
+      query: (id) => `category/${id}`,
+      providesTags: (result, error, id) => [{ type: 'Category', id }],
+    }),
+  }),
 })
 
-export const { useGetCategoriesQuery } = categoryApi
+export const { useGetCategoriesQuery, useGetCategoryByIdQuery } = categoryApi

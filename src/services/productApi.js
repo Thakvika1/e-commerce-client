@@ -25,7 +25,6 @@ export const productApi = createApi({
       forceRefetch: ({ currentArg, previousArg }) =>
         currentArg?.page !== previousArg?.page,
 
-      
       providesTags: ['Product'],
     }),
 

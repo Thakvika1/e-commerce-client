@@ -5,6 +5,7 @@ import ProductInfo from './ProductInfo'
 import RelativeProduct from './RelativeProduct'
 import CustomerReview from './CustomerReview'
 import SecondarySection from './SecondarySection'
+import Title from './Title'
 
 const ProductDetail = () => {
   const { id } = useParams()
@@ -15,14 +16,19 @@ const ProductDetail = () => {
   if (error) return <p>Something went wrong</p>
 
   // console.log(data)
+  // console.log(id)
   return (
     <>
       <>
         <main className="grow w-full max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-8">
+          <Title />
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             <div className="flex flex-col gap-4">
               <Product product={data.item} />
-              <RelativeProduct categoryId={data.item.category_id} />
+              <RelativeProduct
+                categoryId={data.item.category_id}
+                // currProductId={id}
+              />
             </div>
             <ProductInfo product={data.item} />
           </div>

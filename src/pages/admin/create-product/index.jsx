@@ -51,8 +51,8 @@ const CreateProduct = () => {
   } = useGetCategoriesQuery()
   if (isCategoriesLoading) return null
 
-  const categories = data.data.data
-  //   console.log('categories data : ', categories)
+  const categories = data.data
+    // console.log('categories data : ', categories)
 
   const handleCreateProduct = async (data) => {
     try {

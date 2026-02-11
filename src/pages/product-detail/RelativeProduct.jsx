@@ -2,7 +2,10 @@ import React from 'react'
 import { useGetCategoryByIdQuery } from '../../services/categoryApi'
 import { Link } from 'react-router-dom'
 
-const RelativeProduct = ({ categoryId }) => {
+const RelativeProduct = ({
+  categoryId,
+  // currProductId
+}) => {
   const { data, isLoading } = useGetCategoryByIdQuery(categoryId)
 
   if (isLoading) return null
@@ -14,7 +17,13 @@ const RelativeProduct = ({ categoryId }) => {
 
   const productRelative = data.data.products
 
-  console.log('category data : ', productRelative)
+  // const filterProduct = productRelative.filter(
+  //   (item) => item.id !== currProductId
+  // )
+
+  // console.log(filterProduct)
+
+  // console.log('category data : ', productRelative)
 
   return (
     <>

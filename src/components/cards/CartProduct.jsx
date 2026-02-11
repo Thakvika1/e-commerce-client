@@ -8,8 +8,8 @@ import {
 const CartProduct = ({ item }) => {
   const dispatch = useDispatch()
 
-  console.log(item.image)
-  console.log(item.name)
+  // console.log(item.image)
+  // console.log(item.name)
 
   return (
     <>

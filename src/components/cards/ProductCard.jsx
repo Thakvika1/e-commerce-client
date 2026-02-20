@@ -26,9 +26,7 @@ const ProductCard = ({ product }) => {
           <div
             className="w-full h-full bg-cover bg-center group-hover:scale-110 transition-transform duration-500"
             style={{
-              backgroundImage: `url(${
-                product.image
-              })`,
+              backgroundImage: `url(${product.image})`,
             }}
           ></div>
         </div>

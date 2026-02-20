@@ -2,6 +2,7 @@ import React from 'react'
 import HeadLine from './HeadLine'
 import Form from './Form'
 import Footer from './Footer'
+import SocialButton from './SocialButton'
 
 const Login = () => {
   return (
@@ -11,6 +12,7 @@ const Login = () => {
           <div className="p-8 sm:p-10 flex flex-col gap-6">
             <HeadLine />
             <Form />
+            <SocialButton />
             <Footer />
           </div>
         </div>
